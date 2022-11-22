@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -251,6 +251,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1425386981}
   - component: {fileID: 1425386982}
+  - component: {fileID: 1425386984}
+  - component: {fileID: 1425386985}
+  - component: {fileID: 1425386986}
   - component: {fileID: 1425386983}
   m_Layer: 0
   m_Name: Player
@@ -319,6 +322,65 @@ MonoBehaviour:
   m_DefaultActionMap: Movements
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &1425386984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425386980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aa88c5fd5718924e892b4a1569023e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileSize: {fileID: 11400000, guid: 8d1e63fafed0120428640f6883486ab9, type: 2}
+  mapPosition: {fileID: 11400000, guid: 92528e581db8c644382f3df635f76633, type: 2}
+--- !u!114 &1425386985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425386980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66011ae4c4d78d24c9fbce625865a639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileSize: {fileID: 11400000, guid: 8d1e63fafed0120428640f6883486ab9, type: 2}
+  tilePosition: {fileID: 11400000, guid: 672832c775409c940b20b68ac479392b, type: 2}
+  tilePositionRouded: {fileID: 11400000, guid: 5293ea1e87ee98e419bbafd56c7a7c52, type: 2}
+  lastTilePositionRouded: {fileID: 11400000, guid: 0479b9ba1f28f0e468dd2bbb6469348d, type: 2}
+  OnTilePositionChanged: {fileID: 11400000, guid: a454e883a142bea47b76351068fde0f6, type: 2}
+--- !u!114 &1425386986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425386980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 424446812be1ac04a96e3be95d5e4763, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: a454e883a142bea47b76351068fde0f6, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1525304075}
+        m_TargetAssemblyTypeName: FunkySheep.Terrain.Manager, Assembly-CSharp
+        m_MethodName: OnTilePositionChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
 --- !u!1 &1525304073
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,7 +397,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1525304074
 Transform:
   m_ObjectHideFlags: 0
@@ -363,8 +425,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f92136084158c641959f908507719de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resolution: 3
+  resolution: 5
   tilePrefab: {fileID: 8930203439082837206, guid: 69f05a5e45c899b40bed79d880b71286, type: 3}
+  tileSize: {fileID: 11400000, guid: 8d1e63fafed0120428640f6883486ab9, type: 2}
 --- !u!1 &1615338175
 GameObject:
   m_ObjectHideFlags: 0
@@ -599,6 +662,98 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1758306411}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1979654250
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1979654251}
+  - component: {fileID: 1979654252}
+  - component: {fileID: 1979654253}
+  m_Layer: 0
+  m_Name: Maps
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1979654251
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979654250}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1979654252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979654250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae46350f033a74345a2a4e425c02d1ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoomLevel: {fileID: 11400000, guid: cb31a5b4bf836984db3d58b64097ba2a, type: 2}
+  latitude: {fileID: 11400000, guid: 52341af858dd34745b74d8f4e43d4a02, type: 2}
+  longitude: {fileID: 11400000, guid: b25f0a56db43eb1429e33c72938f156b, type: 2}
+  mapPosition: {fileID: 11400000, guid: 92528e581db8c644382f3df635f76633, type: 2}
+  mapPositionRounded: {fileID: 11400000, guid: 6076b7c0dff0ffc46842a8a7f7626ecb, type: 2}
+  OnPositionCalculated: {fileID: 11400000, guid: a09e9fce4a79adc4682b87621cbfc294, type: 2}
+  tileSize: {fileID: 11400000, guid: 8d1e63fafed0120428640f6883486ab9, type: 2}
+--- !u!114 &1979654253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979654250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aef7e45e42abc494e8d5f95a4d0c85a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: a09e9fce4a79adc4682b87621cbfc294, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1425386980}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 1
+      - m_Target: {fileID: 1525304073}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 1
 --- !u!1 &2100219757
 GameObject:
   m_ObjectHideFlags: 0
@@ -608,7 +763,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2100219759}
-  - component: {fileID: 2100219758}
+  - component: {fileID: 2100219761}
   - component: {fileID: 2100219760}
   m_Layer: 0
   m_Name: Gps
@@ -617,22 +772,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2100219758
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2100219757}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1f572fd6f7eee144bec27fd47366022, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  latitude: {fileID: 11400000, guid: 52341af858dd34745b74d8f4e43d4a02, type: 2}
-  longitude: {fileID: 11400000, guid: b25f0a56db43eb1429e33c72938f156b, type: 2}
-  onStartedEvent: {fileID: 11400000, guid: c31dd6560a1bfde4294c352f28f5c29e, type: 2}
-  onNoGpsEvent: {fileID: 11400000, guid: d1a43519fd333f74daedb03fdacc6737, type: 2}
 --- !u!4 &2100219759
 Transform:
   m_ObjectHideFlags: 0
@@ -664,7 +803,7 @@ MonoBehaviour:
   Response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1425386980}
+      - m_Target: {fileID: 1979654250}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -676,3 +815,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 1
+--- !u!114 &2100219761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100219757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f572fd6f7eee144bec27fd47366022, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  latitude: {fileID: 11400000, guid: 52341af858dd34745b74d8f4e43d4a02, type: 2}
+  longitude: {fileID: 11400000, guid: b25f0a56db43eb1429e33c72938f156b, type: 2}
+  onStartedEvent: {fileID: 11400000, guid: c31dd6560a1bfde4294c352f28f5c29e, type: 2}
+  onNoGpsEvent: {fileID: 11400000, guid: d1a43519fd333f74daedb03fdacc6737, type: 2}

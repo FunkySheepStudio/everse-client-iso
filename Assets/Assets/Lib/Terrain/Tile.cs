@@ -11,6 +11,7 @@ namespace FunkySheep.Terrain
             terrain = GetComponent<UnityEngine.Terrain>();
             terrain.terrainData = new TerrainData();
             GetComponent<TerrainCollider>().terrainData = terrain.terrainData;
+            terrain.allowAutoConnect = true;
         }
     }
 }

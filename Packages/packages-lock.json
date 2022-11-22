@@ -178,6 +178,15 @@
       "dependencies": {},
       "url": "https://registry.npmjs.org"
     },
+    "net.funkysheep.unity.events": {
+      "version": "0.1.0",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "net.funkysheep.unity.simplejson": "0.1.0"
+      },
+      "url": "https://registry.npmjs.org"
+    },
     "net.funkysheep.unity.files": {
       "version": "0.1.0",
       "depth": 0,
@@ -186,10 +195,28 @@
       "url": "https://registry.npmjs.org"
     },
     "net.funkysheep.unity.gps": {
-      "version": "0.1.8",
+      "version": "file:C:/Users/Kaas/Documents/FunkySheep/Framework/Unity-GPS",
       "depth": 0,
+      "source": "local",
+      "dependencies": {
+        "net.funkysheep.unity.events": "0.1.0",
+        "net.funkysheep.unity.types": "0.1.0"
+      }
+    },
+    "net.funkysheep.unity.simplejson": {
+      "version": "0.1.0",
+      "depth": 2,
       "source": "registry",
       "dependencies": {},
+      "url": "https://registry.npmjs.org"
+    },
+    "net.funkysheep.unity.types": {
+      "version": "0.1.0",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "net.funkysheep.unity.simplejson": "0.1.0"
+      },
       "url": "https://registry.npmjs.org"
     },
     "com.unity.modules.ai": {

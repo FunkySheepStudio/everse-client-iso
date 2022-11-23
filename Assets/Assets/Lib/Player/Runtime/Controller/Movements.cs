@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
-using static PlayerInputs;
 
 namespace FunkySheep.Player.Controller
 {
@@ -28,7 +26,7 @@ namespace FunkySheep.Player.Controller
         void Move()
         {
             Vector2 movement = playerInputs.Movements.Move.ReadValue<Vector2>();
-            transform.position += (Vector3.forward * movement.y + Vector3.right * movement.x) * Time.deltaTime * speed;
+            transform.position += (Vector3.forward * movement.y + Vector3.right * movement.x) * UnityEngine.Time.deltaTime * speed;
         }
 
     }

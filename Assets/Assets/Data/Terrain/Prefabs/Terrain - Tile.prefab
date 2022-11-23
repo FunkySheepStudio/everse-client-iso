@@ -104,3 +104,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b983ba95a9f49c040ae60eeb84f2369b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  position: {x: 0, y: 0}
+  initialMapPositionRounded: {fileID: 11400000, guid: 6076b7c0dff0ffc46842a8a7f7626ecb, type: 2}
+  zoomLevel: {fileID: 11400000, guid: cb31a5b4bf836984db3d58b64097ba2a, type: 2}
+  diffuseUrl: {fileID: 11400000, guid: 9aed32b4f65ffa74c833d9233b9b6977, type: 2}
+  material: {fileID: -876546973899608171, guid: b7e7521d2b8b39e43b04fa75f92066b9, type: 3}

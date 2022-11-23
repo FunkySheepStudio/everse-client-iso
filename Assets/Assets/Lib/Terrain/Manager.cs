@@ -11,6 +11,7 @@ namespace FunkySheep.Terrain
         public GameObject tilePrefab;
         public FunkySheep.Types.Float tileSize;
         Tile[,] tiles;
+        int boundary;
 
         private void Awake()
         {
@@ -20,11 +21,12 @@ namespace FunkySheep.Terrain
                 Debug.Log("Added +1 to terrain resolution because of odd number");
             }
             tiles = new Tile[resolution, resolution];
+
+            boundary = (resolution - 1) / 2;
         }
 
         private void Start()
         {
-            int boundary = (resolution - 1) / 2;
             for (int x = 0; x < resolution; x++)
             {
                 for (int y = 0; y < resolution; y++)
@@ -32,11 +34,13 @@ namespace FunkySheep.Terrain
                     GameObject tileGo = GameObject.Instantiate(tilePrefab, new Vector3((x - boundary) * tileSize.value, 0, (y - boundary) * tileSize.value), Quaternion.identity, transform);
                     Tile tile = tileGo.GetComponent<Tile>();
                     tileGo.name = x.ToString() + " " + y.ToString();
+                    tile.position = new Vector2Int(x - boundary, y - boundary);
                     tile.GetComponent<UnityEngine.Terrain>().terrainData.size = new Vector3(
                         tileSize.value,
                         1,
                         tileSize.value
                     );
+                    tile.DownLoadDiffuse();
                     tiles[x, y] = tile;
                 }
             }
@@ -44,6 +48,7 @@ namespace FunkySheep.Terrain
 
         public void OnTilePositionChanged(Vector2Int deltaPosition)
         {
+            Debug.Log(deltaPosition);
             Tile[,] newTiles = new Tile[resolution, resolution];
             for (int x = 0; x < resolution; x++)
             {
@@ -53,21 +58,31 @@ namespace FunkySheep.Terrain
                     int oldY = ClampListIndex(y + deltaPosition.y, resolution);
                     newTiles[x, y] = tiles[oldX, oldY];
 
-                    if (deltaPosition.x == -1 && x == 0)
+                    bool tilePositionChange = false;
+
+                    if (
+                        deltaPosition.x == -1 && x == 0 ||
+                        deltaPosition.x == 1 && x == (resolution - 1)
+                        )
                     {
-                        newTiles[x, y].transform.position += resolution * Vector3.left * tileSize.value;
-                    } else if (deltaPosition.x == 1 && x == (resolution - 1))
-                    {
-                        newTiles[x, y].transform.position += resolution * Vector3.right * tileSize.value;
+                        newTiles[x, y].position += new Vector2Int(deltaPosition.x, 0) * resolution;
+                        newTiles[x, y].transform.position += new Vector3(deltaPosition.x, 0, 0) * resolution * tileSize.value;
+                        tilePositionChange = true;
                     }
 
-                    if (deltaPosition.y == -1 && y == 0)
+                    if (
+                        deltaPosition.y == -1 && y == 0 ||
+                        deltaPosition.y == 1 && y == (resolution - 1)
+                        )
                     {
-                        newTiles[x, y].transform.position += resolution * Vector3.back * tileSize.value;
+                        newTiles[x, y].position += new Vector2Int(0, deltaPosition.y) * resolution;
+                        newTiles[x, y].transform.position += new Vector3(0, 0, deltaPosition.y) * resolution * tileSize.value;
+                        tilePositionChange = true;
                     }
-                    else if (deltaPosition.y == 1 && y == (resolution - 1))
+
+                    if (tilePositionChange)
                     {
-                        newTiles[x, y].transform.position += resolution * Vector3.forward * tileSize.value;
+                        newTiles[x, y].DownLoadDiffuse();
                     }
                 }
             }

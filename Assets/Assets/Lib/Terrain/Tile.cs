@@ -11,6 +11,8 @@ namespace FunkySheep.Terrain
         public FunkySheep.Types.Int32 zoomLevel;
         public FunkySheep.Types.String diffuseUrl;
         public Material material;
+        public FunkySheep.Events.GameObjectEvent onTileRefreshed;
+        public Vector2Int mapPosition;
         UnityEngine.Terrain terrain;
         
         private void Awake()
@@ -22,14 +24,25 @@ namespace FunkySheep.Terrain
             terrain.allowAutoConnect = true;
         }
 
-        public void DownLoadDiffuse()
+        public void Refresh()
+        {
+            mapPosition = new Vector2Int(
+                initialMapPositionRounded.value.x + position.x,
+                initialMapPositionRounded.value.y - position.y
+            );
+
+            DownLoadDiffuse();
+            onTileRefreshed.Raise(gameObject);
+        }
+
+        void DownLoadDiffuse()
         {
             string[] variables = new string[3] { "zoom", "position.x", "position.y" };
 
             string[] values = new string[3] {
                 zoomLevel.value.ToString(),
-                (initialMapPositionRounded.value.x + position.x).ToString(),
-                (initialMapPositionRounded.value.y - position.y).ToString()
+                mapPosition.x.ToString(),
+                mapPosition.y.ToString()
             };
 
             string url = diffuseUrl.Interpolate(values, variables);

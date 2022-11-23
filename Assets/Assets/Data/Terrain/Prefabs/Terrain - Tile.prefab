@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6218224105813579867}
   - component: {fileID: 5621616077990480023}
   - component: {fileID: -3065502280740372610}
+  - component: {fileID: 4017241587504415320}
   m_Layer: 0
   m_Name: Terrain - Tile
   m_TagString: Untagged
@@ -109,3 +110,19 @@ MonoBehaviour:
   zoomLevel: {fileID: 11400000, guid: cb31a5b4bf836984db3d58b64097ba2a, type: 2}
   diffuseUrl: {fileID: 11400000, guid: 9aed32b4f65ffa74c833d9233b9b6977, type: 2}
   material: {fileID: -876546973899608171, guid: b7e7521d2b8b39e43b04fa75f92066b9, type: 3}
+  onTileRefreshed: {fileID: 11400000, guid: 96e75123aee949847bbee0bf489d8feb, type: 2}
+  mapPosition: {x: 0, y: 0}
+--- !u!114 &4017241587504415320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8930203439082837206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d64ee8693981a494c926df33665ddcf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 9097936669303355049, guid: 77d5f3107459f2e4d8f83f05ec8dbc61, type: 3}
+  tileSize: {fileID: 11400000, guid: 8d1e63fafed0120428640f6883486ab9, type: 2}

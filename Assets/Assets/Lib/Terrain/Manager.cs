@@ -40,7 +40,7 @@ namespace FunkySheep.Terrain
                         1,
                         tileSize.value
                     );
-                    tile.DownLoadDiffuse();
+                    tile.Refresh();
                     tiles[x, y] = tile;
                 }
             }
@@ -48,7 +48,6 @@ namespace FunkySheep.Terrain
 
         public void OnTilePositionChanged(Vector2Int deltaPosition)
         {
-            Debug.Log(deltaPosition);
             Tile[,] newTiles = new Tile[resolution, resolution];
             for (int x = 0; x < resolution; x++)
             {
@@ -82,7 +81,8 @@ namespace FunkySheep.Terrain
 
                     if (tilePositionChange)
                     {
-                        newTiles[x, y].DownLoadDiffuse();
+                        newTiles[x, y].Refresh();
+                        Debug.Log(x.ToString() + " " + y.ToString());
                     }
                 }
             }

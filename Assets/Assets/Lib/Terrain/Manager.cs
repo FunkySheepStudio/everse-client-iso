@@ -1,6 +1,5 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
+using Unity.Entities;
 
 namespace FunkySheep.Terrain
 {
@@ -12,9 +11,11 @@ namespace FunkySheep.Terrain
         public FunkySheep.Types.Float tileSize;
         Tile[,] tiles;
         int boundary;
+        Maps.Systems.CleanTiles cleanTilesSystem;
 
         private void Awake()
         {
+            cleanTilesSystem = World.DefaultGameObjectInjectionWorld.GetExistingSystemManaged<Maps.Systems.CleanTiles>();
             if (resolution % 2 == 0)
             {
                 resolution += 1;
@@ -81,8 +82,13 @@ namespace FunkySheep.Terrain
 
                     if (tilePositionChange)
                     {
+                        cleanTilesSystem.CleanTile(new Unity.Mathematics.int2
+                        {
+                            x = tiles[oldX, oldY].position.x,
+                            y = tiles[oldX, oldY].position.y,
+                        });
+
                         newTiles[x, y].Refresh();
-                        Debug.Log(x.ToString() + " " + y.ToString());
                     }
                 }
             }

@@ -1,5 +1,7 @@
 using UnityEngine;
 using Unity.Mathematics;
+using Unity.Entities;
+using FunkySheep.Buildings.Systems;
 
 namespace FunkySheep.Player
 {
@@ -11,11 +13,15 @@ namespace FunkySheep.Player
         public FunkySheep.Types.Vector2Int tilePositionRouded;
         public FunkySheep.Types.Vector2Int lastTilePositionRouded;
         public FunkySheep.Events.Vector2IntEvent OnTilePositionChanged;
+        float2 position2D = new float2();
+        float2 lastPosition2D = new float2();
+        CheckPlayerPosition playerPositionSystem;
 
         private void Awake()
         {
             tilePosition.value = Vector2.zero;
             tilePositionRouded.value = lastTilePositionRouded.value = Vector2Int.zero;
+            playerPositionSystem = World.DefaultGameObjectInjectionWorld.GetExistingSystemManaged<CheckPlayerPosition>();
         }
 
         private void Update()
@@ -35,6 +41,19 @@ namespace FunkySheep.Player
                 OnTilePositionChanged.Raise(tilePositionRouded.value - lastTilePositionRouded.value);
                 lastTilePositionRouded.value = tilePositionRouded.value;
             }
+
+            position2D = new float2
+            {
+                x = transform.position.x,
+                y = transform.position.y
+            };
+
+            if (!position2D.Equals(lastPosition2D))
+            {
+                playerPositionSystem.CheckBuildingNearPlayer(position2D);
+                lastPosition2D = position2D;
+            }
+
         }
     }
 }

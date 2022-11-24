@@ -64,22 +64,21 @@ namespace FunkySheep.Maps
         /// </summary>
         /// <returns></returns>
         [BurstCompile]
-        public static float3 GpsToMapRealRelative(double latitude, double longitude, int zoomLevel, int2 initialMapPosition)
+        public static float2 GpsToMapRealRelative(double latitude, double longitude, int zoomLevel, int2 initialMapPosition)
         {
-            float3 p = new float3();
+            float2 p = new float2();
             p.x = (float)(((longitude + 180.0) / 360.0 * (1 << zoomLevel)) - initialMapPosition.x);
-            p.z = (float)(initialMapPosition.y - ((1.0 - Math.Log(Math.Tan(latitude * Math.PI / 180.0) + 1.0 / Math.Cos(latitude * Math.PI / 180.0)) / Math.PI) / 2.0 * (1 << zoomLevel)) + 1);
+            p.y = (float)(initialMapPosition.y - ((1.0 - Math.Log(Math.Tan(latitude * Math.PI / 180.0) + 1.0 / Math.Cos(latitude * Math.PI / 180.0)) / Math.PI) / 2.0 * (1 << zoomLevel)) + 1);
 
             return p;
         }
-
-        public static Vector3 GpsToMapRealRelative(double latitude, double longitude, int zoomLevel, Vector2Int initialMapPosition)
+        [BurstCompile]
+        public static Vector2 GpsToMapRealRelative(double latitude, double longitude, int zoomLevel, Vector2Int initialMapPosition)
         {
-            float3 p = GpsToMapRealRelative(latitude, longitude, zoomLevel, new int2(initialMapPosition.x, initialMapPosition.y));
-            return new Vector3(
+            float2 p = GpsToMapRealRelative(latitude, longitude, zoomLevel, new int2(initialMapPosition.x, initialMapPosition.y));
+            return new Vector2(
                 p.x,
-                0,
-                p.z
+                p.y
             );
         }
 
@@ -88,7 +87,8 @@ namespace FunkySheep.Maps
         /// https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#Lon..2Flat._to_tile_numbers
         /// </summary>
         /// <returns></returns>
-        public static float3 GpsToMapRealRelative(double2 gpsCoordinate, int zoomLevel, int2 initialMapPosition)
+        [BurstCompile]
+        public static float2 GpsToMapRealRelative(double2 gpsCoordinate, int zoomLevel, int2 initialMapPosition)
         {
             return GpsToMapRealRelative(gpsCoordinate.x, gpsCoordinate.y, zoomLevel, initialMapPosition);
         }

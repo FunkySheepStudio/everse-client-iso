@@ -20,8 +20,8 @@ namespace FunkySheep.Buildings
                 (building) => { building.SetActive(false); },
                 (building) => { Destroy(building); },
                 false,
-                10000,
-                20000
+                50,
+                100
             );
 
             terrainTile = GetComponent<Terrain.Tile>();
@@ -31,7 +31,9 @@ namespace FunkySheep.Buildings
         {
             for (int i = 0; i < transform.childCount; i++)
             {
-                pool.Release(transform.GetChild(i).gameObject);
+                GameObject go = transform.GetChild(i).gameObject;
+                if (go.activeSelf)
+                    pool.Release(go);
             }
         }
 

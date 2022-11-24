@@ -1,5 +1,10 @@
 using UnityEngine;
+using Unity.Entities;
 using Unity.Mathematics;
+using FunkySheep.Buildings.Types;
+using FunkySheep.Maps.Components;
+using FunkySheep.Buildings.Components;
+using FunkySheep.Buildings.Systems;
 
 namespace FunkySheep.Buildings
 {
@@ -10,6 +15,18 @@ namespace FunkySheep.Buildings
         public FunkySheep.Types.String relationsUrlTemplate;
         public FunkySheep.Types.Int32 zoomLevel;
         public FunkySheep.Types.Vector2Int initialMapPositionRounded;
+        public GameObject prefab;
+        SpawnBuildings spawnBuildings;
+
+        private void Awake()
+        {
+            spawnBuildings = World.DefaultGameObjectInjectionWorld.GetOrCreateSystemManaged<SpawnBuildings>();
+        }
+
+        private void Update()
+        {
+            spawnBuildings.Spawn(transform, prefab);
+        }
 
         public void Download(GameObject tileGo)
         {
@@ -22,7 +39,8 @@ namespace FunkySheep.Buildings
             {
                 string fileStr = System.Text.Encoding.Default.GetString(file);
                 Types.JsonOsmWays waysRoot = JsonUtility.FromJson<Types.JsonOsmWays>(fileStr);
-                tileManager.Spawn(waysRoot.elements);
+                //tileManager.Spawn(waysRoot.elements);
+                CreateEntities(waysRoot.elements, tile);
             }));
 
             string relationsUrl = InterpolatedUrl(tile.mapPosition, relationsUrlTemplate);
@@ -33,9 +51,45 @@ namespace FunkySheep.Buildings
 
                 for (int i = 0; i < relationsRoot.elements.Length; i++)
                 {
-                    tileManager.Spawn(relationsRoot.elements[i].members);
+                    //tileManager.Spawn(relationsRoot.elements[i].members);
+                    CreateEntities(relationsRoot.elements[i].members, tile);
                 }
             }));
+        }
+
+        void CreateEntities(JsonOsmWay[] buildings, Terrain.Tile tile)
+        {
+            EntityCommandBufferSystem ecbSystem = World.DefaultGameObjectInjectionWorld.GetExistingSystemManaged<EndSimulationEntityCommandBufferSystem>();
+            EntityCommandBuffer buffer = ecbSystem.CreateCommandBuffer();
+
+            Maps.Components.TilePosition tilePosition = new Maps.Components.TilePosition
+            {
+                Value = new int2
+                (
+                    tile.position.x,
+                    tile.position.y
+                )
+            };
+
+            for (int i = 0; i < buildings.Length; i++)
+            {
+                Entity entity = buffer.CreateEntity();
+                buffer.AddComponent<Building>(entity, new Building { });
+                buffer.AddSharedComponent<Maps.Components.TilePosition>(entity, tilePosition);
+                DynamicBuffer<GPSCoordinates> coordinates = buffer.AddBuffer<GPSCoordinates>(entity);
+
+                for (int j = 0; j < buildings[i].geometry.Length; j++)
+                {
+                    coordinates.Add(new GPSCoordinates
+                    {
+                        Value = new double2
+                        {
+                            x = buildings[i].geometry[j].lat,
+                            y = buildings[i].geometry[j].lon
+                        }
+                    });
+                }
+            }
         }
 
         /// <summary>

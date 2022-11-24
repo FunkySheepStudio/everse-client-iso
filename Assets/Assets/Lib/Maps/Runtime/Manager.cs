@@ -1,5 +1,8 @@
 using UnityEngine;
 using Unity.Mathematics;
+using Unity.Entities;
+using FunkySheep.Maps.Components;
+using static UnityEngine.EventSystems.EventTrigger;
 
 namespace FunkySheep.Maps
 {
@@ -13,6 +16,18 @@ namespace FunkySheep.Maps
         public FunkySheep.Types.Vector2Int mapPositionRounded;
         public FunkySheep.Events.GameObjectEvent OnPositionCalculated;
         public FunkySheep.Types.Float tileSize;
+        EntityManager entityManager;
+        Entity entity;
+
+        private void Awake()
+        {
+            entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
+            entity = entityManager.CreateEntity();
+            entityManager.AddComponentData<ZoomLevel>(entity, new ZoomLevel
+            {
+                Value = zoomLevel.value
+            });
+        }
 
         private void Start()
         {
@@ -31,11 +46,25 @@ namespace FunkySheep.Maps
                 x = (int)math.floor(mapPosition.value.x),
                 y = (int)math.floor(mapPosition.value.y)
             };
+
+            entityManager.AddComponentData<InitialMapPosition>(entity, new InitialMapPosition
+            {
+                Value = new int2
+                {
+                    x = mapPositionRounded.value.x,
+                    y = mapPositionRounded.value.y
+                }
+            });
         }
 
         void CalculateSize()
         {
             tileSize.value = (float)(156543.03 / math.pow(2, zoomLevel.value) * math.cos(math.PI * 2 / 360 * latitude.value) * 256);
+
+            entityManager.AddComponentData<TileSize>(entity, new TileSize
+            {
+                Value = tileSize.value
+            });
         }
     }
 }

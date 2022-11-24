@@ -6,7 +6,6 @@ using FunkySheep.Buildings.Components.Tags;
 
 namespace FunkySheep.Buildings.Systems
 {
-    [DisableAutoCreation]
     [UpdateInGroup(typeof(SpawnBuildingGroup))]
     [UpdateAfter(typeof(CalculatePointsCounterClockwise))]
     public partial class CalculatePointsPerimeter : SystemBase
@@ -23,8 +22,6 @@ namespace FunkySheep.Buildings.Systems
                 }
 
                 building.perimeter = perimeter;
-
-                buffer.AddComponent<SpawnBuildingOver>(entity);
             })
             .WithNone<SpawnBuildingOver>()
             .WithDeferredPlaybackSystem<EndSimulationEntityCommandBufferSystem>()

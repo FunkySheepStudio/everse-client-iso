@@ -8,31 +8,30 @@ using FunkySheep.Buildings.Components.Tags;
 
 namespace FunkySheep.Buildings.Systems
 {
-    [DisableAutoCreation]
     [UpdateInGroup(typeof(SpawnBuildingGroup))]
     [UpdateAfter(typeof(CheckPlayerPosition))]
     public partial class CalculatePointsOrder : SystemBase
     {
         protected override void OnUpdate()
         {
-            Entities.ForEach((Entity entity, EntityCommandBuffer buffer, ref DynamicBuffer<GPSCoordinates> gPSCoordinates, in Building building, in Spawn spawn) =>
+            Entities.ForEach((Entity entity, EntityCommandBuffer buffer, ref DynamicBuffer<Points> points, in Building building, in Spawn spawn) =>
             {
                 int maxPointIndex = 0;
-                for (int i = 0; i < gPSCoordinates.Length; i++)
+                for (int i = 0; i < points.Length; i++)
                 {
-                    if (math.distance(building.center, gPSCoordinates[maxPointIndex].Value) < math.distance(building.center, gPSCoordinates[i].Value))
+                    if (math.distance(building.center, points[maxPointIndex].Value) < math.distance(building.center, points[i].Value))
                     {
                         maxPointIndex = i;
                     }
                 }
 
-                NativeArray<GPSCoordinates> tempPoints = new NativeArray<GPSCoordinates>(gPSCoordinates.Length, Allocator.Temp);
-                tempPoints.CopyFrom(gPSCoordinates.AsNativeArray());
-                gPSCoordinates.Clear();
+                NativeArray<Points> tempPoints = new NativeArray<Points>(points.Length, Allocator.Temp);
+                tempPoints.CopyFrom(points.AsNativeArray());
+                points.Clear();
 
                 for (int i = 0; i < tempPoints.Length; i++)
                 {
-                    gPSCoordinates.Add(tempPoints[(i + maxPointIndex) % tempPoints.Length]);
+                    points.Add(tempPoints[(i + maxPointIndex) % tempPoints.Length]);
                 }
             })
             .WithNone<SpawnBuildingOver>()

@@ -16,7 +16,7 @@ namespace FunkySheep.Buildings.Systems
 
         public void Spawn(Transform root, GameObject prefabs)
         {
-            Entities.ForEach((Entity entity, EntityCommandBuffer buffer, ref Building building, in DynamicBuffer<Points> points, in Spawn spawn) =>
+            Entities.ForEach((Entity entity, EntityCommandBuffer buffer, in Building building, in DynamicBuffer<Points> points, in Spawn spawn) =>
             {
                 for (int i = 0; i < points.Length; i++)
                 {

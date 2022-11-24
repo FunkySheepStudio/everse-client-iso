@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -307,6 +307,7 @@ GameObject:
   - component: {fileID: 1425386984}
   - component: {fileID: 1425386985}
   - component: {fileID: 1425386986}
+  - component: {fileID: 1425386987}
   - component: {fileID: 1425386983}
   m_Layer: 0
   m_Name: Player
@@ -407,6 +408,7 @@ MonoBehaviour:
   tilePositionRouded: {fileID: 11400000, guid: 5293ea1e87ee98e419bbafd56c7a7c52, type: 2}
   lastTilePositionRouded: {fileID: 11400000, guid: 0479b9ba1f28f0e468dd2bbb6469348d, type: 2}
   OnTilePositionChanged: {fileID: 11400000, guid: a454e883a142bea47b76351068fde0f6, type: 2}
+  OnLongPositionChanged: {fileID: 11400000, guid: c65fb1d457ad5a94ba2c9fcd200a1ad0, type: 2}
 --- !u!114 &1425386986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -426,6 +428,34 @@ MonoBehaviour:
       - m_Target: {fileID: 1525304075}
         m_TargetAssemblyTypeName: FunkySheep.Terrain.Manager, Assembly-CSharp
         m_MethodName: OnTilePositionChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+--- !u!114 &1425386987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425386980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69d02abec6f93ec4b897ee26d661fb3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: c65fb1d457ad5a94ba2c9fcd200a1ad0, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1717909899}
+        m_TargetAssemblyTypeName: FunkySheep.Buildings.Manager, Assembly-CSharp
+        m_MethodName: OnPlayerLongPositionChanged
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -897,6 +927,7 @@ GameObject:
   - component: {fileID: 2100219759}
   - component: {fileID: 2100219761}
   - component: {fileID: 2100219760}
+  - component: {fileID: 2100219762}
   m_Layer: 0
   m_Name: Gps
   m_TagString: Untagged
@@ -963,3 +994,31 @@ MonoBehaviour:
   longitude: {fileID: 11400000, guid: b25f0a56db43eb1429e33c72938f156b, type: 2}
   onStartedEvent: {fileID: 11400000, guid: c31dd6560a1bfde4294c352f28f5c29e, type: 2}
   onNoGpsEvent: {fileID: 11400000, guid: d1a43519fd333f74daedb03fdacc6737, type: 2}
+--- !u!114 &2100219762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100219757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aef7e45e42abc494e8d5f95a4d0c85a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: d1a43519fd333f74daedb03fdacc6737, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1979654250}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 1

@@ -13,6 +13,7 @@ namespace FunkySheep.Player
         public FunkySheep.Types.Vector2Int tilePositionRouded;
         public FunkySheep.Types.Vector2Int lastTilePositionRouded;
         public FunkySheep.Events.Vector2IntEvent OnTilePositionChanged;
+        public FunkySheep.Events.Vector2Event OnLongPositionChanged;
         float2 position2D = new float2();
         float2 lastPosition2D = new float2();
         CheckPlayerPosition playerPositionSystem;
@@ -45,15 +46,15 @@ namespace FunkySheep.Player
             position2D = new float2
             {
                 x = transform.position.x,
-                y = transform.position.y
+                y = transform.position.z
             };
 
-            if (!position2D.Equals(lastPosition2D))
+            if (math.distance(position2D, lastPosition2D) > 10)
             {
                 playerPositionSystem.CheckBuildingNearPlayer(position2D);
+                OnLongPositionChanged.Raise(position2D);
                 lastPosition2D = position2D;
             }
-
         }
     }
 }

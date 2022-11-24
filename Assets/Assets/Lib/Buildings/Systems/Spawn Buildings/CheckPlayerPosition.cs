@@ -17,12 +17,13 @@ namespace FunkySheep.Buildings.Systems
         {
             Entities.ForEach((Entity entity, EntityCommandBuffer buffer, in Building building, in SetBuildingCoordinatesOver setBuildingCoordinatesOver) =>
             {
-                if (math.distance(position, building.center) < 200)
+                if (math.distance(position, building.center) < 100)
                 {
                     buffer.AddComponent<Spawn>(entity);
                 }
             })
             .WithDeferredPlaybackSystem<EndSimulationEntityCommandBufferSystem>()
+            .WithNone<Spawn>()
             .WithNone<SpawnBuildingOver>()
             .ScheduleParallel();
         }

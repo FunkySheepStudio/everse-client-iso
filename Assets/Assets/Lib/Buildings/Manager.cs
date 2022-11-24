@@ -23,7 +23,7 @@ namespace FunkySheep.Buildings
             spawnBuildings = World.DefaultGameObjectInjectionWorld.GetOrCreateSystemManaged<SpawnBuildings>();
         }
 
-        private void Update()
+        public void OnPlayerLongPositionChanged(Vector2 playerPosition)
         {
             spawnBuildings.Spawn(transform, prefab);
         }

@@ -14,6 +14,7 @@ namespace FunkySheep.Buildings
         public FunkySheep.Types.String waysUrlTemplate;
         public FunkySheep.Types.String relationsUrlTemplate;
         public FunkySheep.Types.Int32 zoomLevel;
+        public FunkySheep.Types.Float tileSize;
         public FunkySheep.Types.Vector2Int initialMapPositionRounded;
         public GameObject prefab;
         SpawnBuildings spawnBuildings;
@@ -25,7 +26,53 @@ namespace FunkySheep.Buildings
 
         public void OnPlayerLongPositionChanged(Vector2 playerPosition)
         {
+            Clean(playerPosition);
             spawnBuildings.Spawn(transform, prefab);
+        }
+
+        public void ClearTile(Vector2Int tilePosition)
+        {
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                GameObject building = transform.GetChild(i).gameObject;
+                Vector2 buildingPosition2D = new Vector2
+                {
+                    x = building.transform.position.x,
+                    y = building.transform.position.z
+                };
+
+                if (buildingPosition2D.x > tilePosition.x * tileSize.value &&
+                    buildingPosition2D.x < (tilePosition.x + 1) * tileSize.value &&
+                    buildingPosition2D.y > tilePosition.y * tileSize.value &&
+                    buildingPosition2D.y < (tilePosition.y + 1) * tileSize.value
+                )
+                {
+                    Destroy(building);
+                }
+            }
+        }
+
+        public void Clean(Vector2 playerPosition)
+        {
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                GameObject building = transform.GetChild(i).gameObject;
+                Vector2 buildingPosition2D = new Vector2
+                {
+                    x = building.transform.position.x,
+                    y = building.transform.position.z
+                };
+
+                if (math.distance(playerPosition, buildingPosition2D) > 100)
+                {
+                    building.SetActive(false);
+                }
+                else
+                {
+                    building.SetActive(true);
+                }
+
+            }
         }
 
         public void Download(GameObject tileGo)

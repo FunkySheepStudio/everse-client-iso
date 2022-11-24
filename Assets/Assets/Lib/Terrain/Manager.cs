@@ -9,6 +9,7 @@ namespace FunkySheep.Terrain
         public int resolution;
         public GameObject tilePrefab;
         public FunkySheep.Types.Float tileSize;
+        public FunkySheep.Events.Vector2IntEvent OnTileDispose;
         Tile[,] tiles;
         int boundary;
         Maps.Systems.CleanTiles cleanTilesSystem;
@@ -58,6 +59,7 @@ namespace FunkySheep.Terrain
                     int oldY = ClampListIndex(y + deltaPosition.y, resolution);
                     newTiles[x, y] = tiles[oldX, oldY];
 
+                    Vector2Int oldPosition = tiles[oldX, oldY].position;
                     bool tilePositionChange = false;
 
                     if (
@@ -84,9 +86,11 @@ namespace FunkySheep.Terrain
                     {
                         cleanTilesSystem.CleanTile(new Unity.Mathematics.int2
                         {
-                            x = tiles[oldX, oldY].position.x,
-                            y = tiles[oldX, oldY].position.y,
+                            x = oldPosition.x,
+                            y = oldPosition.y,
                         });
+
+                        OnTileDispose.Raise(new Vector2Int(oldPosition.x, oldPosition.y));
 
                         newTiles[x, y].Refresh();
                     }

@@ -10,6 +10,12 @@ namespace FunkySheep.Buildings
         public GameObject wallPrefab;
         public GameObject roofPrefab;
         public float2[] points;
+        public float floorHeight;
+
+        private void Awake()
+        {
+            floorHeight = UnityEngine.Random.Range(5, 10);
+        }
 
         private void Start()
         {
@@ -52,13 +58,13 @@ namespace FunkySheep.Buildings
 
                 GameObject wallGo = GameObject.Instantiate(wallPrefab, middlePoint, LookAtRotationOnly_Y, transform);
                 wallGo.AddComponent<MeshCollider>();
-                wallGo.transform.localScale = new Vector3(1, 5, wallWidth);
+                wallGo.transform.localScale = new Vector3(1, floorHeight, wallWidth);
             }
         }
 
         void CreateRoof()
         {
-            GameObject roofGo = GameObject.Instantiate(roofPrefab, Vector3.up * 5, Quaternion.Euler(90, 0, 0), transform);
+            GameObject roofGo = GameObject.Instantiate(roofPrefab, Vector3.up * floorHeight, Quaternion.Euler(90, 0, 0), transform);
             Roof roof = roofGo.AddComponent<Roof>();
             roof.contour = new Vector2[points.Length];
             for (int i = 0; i < points.Length; i++)

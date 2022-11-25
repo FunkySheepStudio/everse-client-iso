@@ -6,11 +6,13 @@ namespace FunkySheep.Player.Controller
     public class Movements : MonoBehaviour
     {
         public float speed = 10;
+        CharacterController controller;
 
         PlayerInputs playerInputs;
         private void Awake()
         {
             playerInputs = new PlayerInputs();
+            controller = GetComponent<CharacterController>();
         }
 
         private void Start()
@@ -26,7 +28,7 @@ namespace FunkySheep.Player.Controller
         void Move()
         {
             Vector2 movement = playerInputs.Movements.Move.ReadValue<Vector2>();
-            transform.position += (Vector3.forward * movement.y + Vector3.right * movement.x) * UnityEngine.Time.deltaTime * speed;
+            controller.Move((Vector3.forward * movement.y + Vector3.right * movement.x) * UnityEngine.Time.deltaTime * speed);
         }
 
     }

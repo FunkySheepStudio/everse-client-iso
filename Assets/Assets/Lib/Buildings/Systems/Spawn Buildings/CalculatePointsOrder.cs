@@ -14,7 +14,7 @@ namespace FunkySheep.Buildings.Systems
     {
         protected override void OnUpdate()
         {
-            Entities.ForEach((Entity entity, EntityCommandBuffer buffer, ref DynamicBuffer<Points> points, in Building building, in Spawn spawn) =>
+            Entities.ForEach((Entity entity, EntityCommandBuffer buffer, ref DynamicBuffer<Points> points, in Components.Building building, in Spawn spawn) =>
             {
                 int maxPointIndex = 0;
                 for (int i = 0; i < points.Length; i++)

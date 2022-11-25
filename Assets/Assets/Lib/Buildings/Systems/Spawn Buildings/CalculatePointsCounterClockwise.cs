@@ -13,15 +13,15 @@ namespace FunkySheep.Buildings.Systems
     {
         protected override void OnUpdate()
         {
-            Entities.ForEach((Entity entity, EntityCommandBuffer buffer, ref DynamicBuffer<Points> points, in Building building, in Spawn spawn) =>
+            Entities.ForEach((Entity entity, EntityCommandBuffer buffer, ref DynamicBuffer<Points> points, in Components.Building building, in Spawn spawn) =>
             {
-                bool result = Geometry.utils.IsTriangleOrientedClockwise(
+                bool result = Geometry.Utils.IsTriangleOrientedClockwise(
                     points[points.Length - 1].Value,
                     points[0].Value,
                     points[1].Value
                 );
 
-                if (!result)
+                if (result)
                 {
                     NativeArray<Points> tempPoints = new NativeArray<Points>(points.Length, Allocator.Temp);
                     tempPoints.CopyFrom(points.AsNativeArray());

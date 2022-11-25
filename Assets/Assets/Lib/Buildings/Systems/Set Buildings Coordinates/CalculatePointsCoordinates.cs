@@ -24,7 +24,7 @@ namespace FunkySheep.Buildings.Systems
             if (!TryGetSingleton<InitialMapPosition>(out initialMapPosition))
                 return;
 
-            Entities.ForEach((Entity entity, EntityCommandBuffer buffer, ref Building building, in DynamicBuffer<GPSCoordinates> gPSCoordinates) =>
+            Entities.ForEach((Entity entity, EntityCommandBuffer buffer, ref Components.Building building, in DynamicBuffer<GPSCoordinates> gPSCoordinates) =>
             {
 
                 DynamicBuffer<Points> points = buffer.AddBuffer<Points>(entity);

@@ -10,11 +10,11 @@ namespace FunkySheep.Buildings.Systems
     {
         protected override void OnUpdate()
         {
-            Entities.ForEach((Entity entity, EntityCommandBuffer buffer, ref DynamicBuffer<GPSCoordinates> gPSCoordinates, in Building building) =>
+            Entities.ForEach((Entity entity, EntityCommandBuffer buffer, ref DynamicBuffer<GPSCoordinates> gPSCoordinates, in Components.Building building) =>
             {
                 for (int i = 0; i < gPSCoordinates.Length; i++)
                 {
-                    if (Geometry.utils.IsCollinear(
+                    if (Geometry.Utils.IsCollinear(
                         gPSCoordinates[i].Value,
                         gPSCoordinates[(i + 1) % gPSCoordinates.Length].Value,
                         gPSCoordinates[(i + 2) % gPSCoordinates.Length].Value

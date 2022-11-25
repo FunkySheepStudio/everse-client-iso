@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace FunkySheep.Geometry
 {
-    public struct utils
+    public struct Utils
     {
         //Is a triangle in 2d space oriented clockwise or counter-clockwise
         //https://math.stackexchange.com/questions/1324179/how-to-tell-if-3-connected-points-are-connected-clockwise-or-counter-clockwise
@@ -81,6 +81,14 @@ namespace FunkySheep.Geometry
             {
                 return false;
             }
+        }
+
+        [BurstCompile]
+        public static int ClampListIndex(int index, int listSize)
+        {
+            index = ((index % listSize) + listSize) % listSize;
+
+            return index;
         }
     }
 }

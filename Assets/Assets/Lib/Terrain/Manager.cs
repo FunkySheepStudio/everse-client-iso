@@ -1,5 +1,6 @@
 using UnityEngine;
 using Unity.Entities;
+using FunkySheep.Geometry;
 
 namespace FunkySheep.Terrain
 {
@@ -53,10 +54,10 @@ namespace FunkySheep.Terrain
             Tile[,] newTiles = new Tile[resolution, resolution];
             for (int x = 0; x < resolution; x++)
             {
-                int oldX = ClampListIndex(x + deltaPosition.x, resolution);
+                int oldX = Utils.ClampListIndex(x + deltaPosition.x, resolution);
                 for (int y = 0; y < resolution; y++)
                 {
-                    int oldY = ClampListIndex(y + deltaPosition.y, resolution);
+                    int oldY = Utils.ClampListIndex(y + deltaPosition.y, resolution);
                     newTiles[x, y] = tiles[oldX, oldY];
 
                     Vector2Int oldPosition = tiles[oldX, oldY].position;
@@ -98,13 +99,6 @@ namespace FunkySheep.Terrain
             }
 
             tiles = newTiles;
-        }
-
-        public static int ClampListIndex(int index, int listSize)
-        {
-            index = ((index % listSize) + listSize) % listSize;
-
-            return index;
         }
     }
 }

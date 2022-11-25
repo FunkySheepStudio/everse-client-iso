@@ -78,15 +78,12 @@ namespace FunkySheep.Buildings
         public void Download(GameObject tileGo)
         {
             Terrain.Tile tile = tileGo.GetComponent<Terrain.Tile>();
-            TileManager tileManager = tileGo.GetComponent<TileManager>();
-            tileManager.Clear();
 
             string waysUrl = InterpolatedUrl(tile.mapPosition, waysUrlTemplate);
             StartCoroutine(FunkySheep.Network.Downloader.Download(waysUrl, (fileID, file) =>
             {
                 string fileStr = System.Text.Encoding.Default.GetString(file);
                 Types.JsonOsmWays waysRoot = JsonUtility.FromJson<Types.JsonOsmWays>(fileStr);
-                //tileManager.Spawn(waysRoot.elements);
                 CreateEntities(waysRoot.elements, tile);
             }));
 
@@ -98,7 +95,6 @@ namespace FunkySheep.Buildings
 
                 for (int i = 0; i < relationsRoot.elements.Length; i++)
                 {
-                    //tileManager.Spawn(relationsRoot.elements[i].members);
                     CreateEntities(relationsRoot.elements[i].members, tile);
                 }
             }));
@@ -121,7 +117,7 @@ namespace FunkySheep.Buildings
             for (int i = 0; i < buildings.Length; i++)
             {
                 Entity entity = buffer.CreateEntity();
-                buffer.AddComponent<Building>(entity, new Building { });
+                buffer.AddComponent<Components.Building>(entity, new Components.Building { });
                 buffer.AddSharedComponent<Maps.Components.TilePosition>(entity, tilePosition);
                 DynamicBuffer<GPSCoordinates> coordinates = buffer.AddBuffer<GPSCoordinates>(entity);
 

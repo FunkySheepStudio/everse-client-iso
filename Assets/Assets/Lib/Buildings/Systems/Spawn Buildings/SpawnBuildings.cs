@@ -3,6 +3,8 @@ using Unity.Entities;
 using UnityEngine;
 using FunkySheep.Buildings.Components.Barriers;
 using FunkySheep.Buildings.Components.Tags;
+using System.Linq;
+using Unity.Mathematics;
 
 namespace FunkySheep.Buildings.Systems
 {
@@ -16,21 +18,27 @@ namespace FunkySheep.Buildings.Systems
 
         public void Spawn(Transform root, GameObject prefabs)
         {
-            Entities.ForEach((Entity entity, EntityCommandBuffer buffer, in Building building, in DynamicBuffer<Points> points, in Spawn spawn) =>
+            Entities.ForEach((Entity entity, EntityCommandBuffer buffer, in Components.Building building, in DynamicBuffer<Points> points, in Spawn spawn) =>
             {
+                GameObject buildingGo = GameObject.Instantiate(prefabs, root);
+                buildingGo.transform.localPosition = new Vector3
+                (
+                    building.center.x,
+                    0,
+                    building.center.y
+                );
+
+                Building buildingComponent = buildingGo.GetComponent<Building>();
+                buildingComponent.points = new float2[points.Length];
+
                 for (int i = 0; i < points.Length; i++)
                 {
-                    GameObject buildingGo = GameObject.Instantiate(prefabs, root);
-                    buildingGo.transform.localPosition = new Vector3
-                    (
-                        points[i].Value.x,
-                        0,
-                        points[i].Value.y
-                    );
+                    buildingComponent.points[i] = points[i].Value;
                 }
 
                 buffer.AddComponent<SpawnBuildingOver>(entity);
             })
+
             .WithNone<SpawnBuildingOver>()
             .WithDeferredPlaybackSystem<EndSimulationEntityCommandBufferSystem>()
             .WithoutBurst()

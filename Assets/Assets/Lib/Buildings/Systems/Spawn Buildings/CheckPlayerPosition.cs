@@ -15,7 +15,7 @@ namespace FunkySheep.Buildings.Systems
 
         public void CheckBuildingNearPlayer(float2 position)
         {
-            Entities.ForEach((Entity entity, EntityCommandBuffer buffer, in Building building, in SetBuildingCoordinatesOver setBuildingCoordinatesOver) =>
+            Entities.ForEach((Entity entity, EntityCommandBuffer buffer, in Components.Building building, in SetBuildingCoordinatesOver setBuildingCoordinatesOver) =>
             {
                 if (math.distance(position, building.center) < 100)
                 {

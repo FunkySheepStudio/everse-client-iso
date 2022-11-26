@@ -11,7 +11,7 @@
                     "id": "a184ac91-16dc-4b80-876c-5824a44e0fe4",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "SlowTap",
                     "initialStateCheck": true
                 }
             ],
@@ -70,6 +70,62 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                }
+            ]
+        },
+        {
+            "name": "Touch",
+            "id": "d44ce6dc-7a40-43b8-8379-1e0ccf5ba18c",
+            "actions": [
+                {
+                    "name": "Hold",
+                    "type": "Value",
+                    "id": "fa8c9906-7f13-4909-9106-63a3d1eddd39",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "Hold",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "69b858db-1825-4a42-8704-d0bde0255fa0",
+                    "path": "<Touchscreen>/primaryTouch/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Hold",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Mouse",
+            "id": "2da8119b-142d-4ebb-a7e4-aae1b55e1fdb",
+            "actions": [
+                {
+                    "name": "Click",
+                    "type": "Button",
+                    "id": "2ed74038-976e-4a11-aba6-6ee7089a4a52",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "b9c8d60b-6587-4f02-84de-6cfea0c6710a",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

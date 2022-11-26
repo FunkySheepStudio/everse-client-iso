@@ -40,10 +40,16 @@ namespace FunkySheep.Player.Controller
             controller.Move((Vector3.forward * movement.y + Vector3.right * movement.x) * UnityEngine.Time.deltaTime * speed);
 
             // Move gyro
-            controller.Move(transform.forward * (Input.acceleration.y - initialYAcceleration) * UnityEngine.Time.deltaTime * gyroSpeed);
+            if (math.abs(Input.acceleration.y - initialYAcceleration) > 0.1)
+            {
+                controller.Move(transform.forward * (Input.acceleration.y - initialYAcceleration) * UnityEngine.Time.deltaTime * gyroSpeed);
+            }
 
             //Rotate Gyro
-            transform.Rotate(Vector3.up * Input.acceleration.x * UnityEngine.Time.deltaTime * gyroSpeed);
+            if (math.abs(Input.acceleration.x) > 0.1)
+            {
+                transform.Rotate(Vector3.up * Input.acceleration.x * UnityEngine.Time.deltaTime * gyroSpeed);
+            }
         }
 
     }

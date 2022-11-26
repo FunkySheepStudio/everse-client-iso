@@ -326,14 +326,13 @@
       "url": "https://registry.npmjs.org"
     },
     "net.funkysheep.unity.gps": {
-      "version": "0.2.0",
+      "version": "file:C:/Users/Kaas/Documents/FunkySheep/Framework/Unity-GPS",
       "depth": 0,
-      "source": "registry",
+      "source": "local",
       "dependencies": {
         "net.funkysheep.unity.events": "0.1.0",
         "net.funkysheep.unity.types": "0.1.0"
-      },
-      "url": "https://registry.npmjs.org"
+      }
     },
     "net.funkysheep.unity.network": {
       "version": "0.2.1",

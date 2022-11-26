@@ -33,7 +33,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""id"": ""a184ac91-16dc-4b80-876c-5824a44e0fe4"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""SlowTap"",
                     ""initialStateCheck"": true
                 }
             ],
@@ -94,6 +94,62 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""Touch"",
+            ""id"": ""d44ce6dc-7a40-43b8-8379-1e0ccf5ba18c"",
+            ""actions"": [
+                {
+                    ""name"": ""Hold"",
+                    ""type"": ""Value"",
+                    ""id"": ""fa8c9906-7f13-4909-9106-63a3d1eddd39"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold"",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""69b858db-1825-4a42-8704-d0bde0255fa0"",
+                    ""path"": ""<Touchscreen>/primaryTouch/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Hold"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Mouse"",
+            ""id"": ""2da8119b-142d-4ebb-a7e4-aae1b55e1fdb"",
+            ""actions"": [
+                {
+                    ""name"": ""Click"",
+                    ""type"": ""Button"",
+                    ""id"": ""2ed74038-976e-4a11-aba6-6ee7089a4a52"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""b9c8d60b-6587-4f02-84de-6cfea0c6710a"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -101,6 +157,12 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         // Movements
         m_Movements = asset.FindActionMap("Movements", throwIfNotFound: true);
         m_Movements_Move = m_Movements.FindAction("Move", throwIfNotFound: true);
+        // Touch
+        m_Touch = asset.FindActionMap("Touch", throwIfNotFound: true);
+        m_Touch_Hold = m_Touch.FindAction("Hold", throwIfNotFound: true);
+        // Mouse
+        m_Mouse = asset.FindActionMap("Mouse", throwIfNotFound: true);
+        m_Mouse_Click = m_Mouse.FindAction("Click", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -189,8 +251,82 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         }
     }
     public MovementsActions @Movements => new MovementsActions(this);
+
+    // Touch
+    private readonly InputActionMap m_Touch;
+    private ITouchActions m_TouchActionsCallbackInterface;
+    private readonly InputAction m_Touch_Hold;
+    public struct TouchActions
+    {
+        private @PlayerInputs m_Wrapper;
+        public TouchActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Hold => m_Wrapper.m_Touch_Hold;
+        public InputActionMap Get() { return m_Wrapper.m_Touch; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(TouchActions set) { return set.Get(); }
+        public void SetCallbacks(ITouchActions instance)
+        {
+            if (m_Wrapper.m_TouchActionsCallbackInterface != null)
+            {
+                @Hold.started -= m_Wrapper.m_TouchActionsCallbackInterface.OnHold;
+                @Hold.performed -= m_Wrapper.m_TouchActionsCallbackInterface.OnHold;
+                @Hold.canceled -= m_Wrapper.m_TouchActionsCallbackInterface.OnHold;
+            }
+            m_Wrapper.m_TouchActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Hold.started += instance.OnHold;
+                @Hold.performed += instance.OnHold;
+                @Hold.canceled += instance.OnHold;
+            }
+        }
+    }
+    public TouchActions @Touch => new TouchActions(this);
+
+    // Mouse
+    private readonly InputActionMap m_Mouse;
+    private IMouseActions m_MouseActionsCallbackInterface;
+    private readonly InputAction m_Mouse_Click;
+    public struct MouseActions
+    {
+        private @PlayerInputs m_Wrapper;
+        public MouseActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Click => m_Wrapper.m_Mouse_Click;
+        public InputActionMap Get() { return m_Wrapper.m_Mouse; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MouseActions set) { return set.Get(); }
+        public void SetCallbacks(IMouseActions instance)
+        {
+            if (m_Wrapper.m_MouseActionsCallbackInterface != null)
+            {
+                @Click.started -= m_Wrapper.m_MouseActionsCallbackInterface.OnClick;
+                @Click.performed -= m_Wrapper.m_MouseActionsCallbackInterface.OnClick;
+                @Click.canceled -= m_Wrapper.m_MouseActionsCallbackInterface.OnClick;
+            }
+            m_Wrapper.m_MouseActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Click.started += instance.OnClick;
+                @Click.performed += instance.OnClick;
+                @Click.canceled += instance.OnClick;
+            }
+        }
+    }
+    public MouseActions @Mouse => new MouseActions(this);
     public interface IMovementsActions
     {
         void OnMove(InputAction.CallbackContext context);
+    }
+    public interface ITouchActions
+    {
+        void OnHold(InputAction.CallbackContext context);
+    }
+    public interface IMouseActions
+    {
+        void OnClick(InputAction.CallbackContext context);
     }
 }

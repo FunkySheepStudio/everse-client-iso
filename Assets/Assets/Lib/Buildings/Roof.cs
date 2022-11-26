@@ -62,6 +62,9 @@ namespace FunkySheep.Buildings
             filter.sharedMesh.triangles = triangles;
 
             filter.sharedMesh.RecalculateNormals();
+
+            MeshCollider meshCollider = GetComponent<MeshCollider>();
+            meshCollider.sharedMesh = filter.sharedMesh;
         }
     }
 }

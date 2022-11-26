@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7692298388905076801}
   - component: {fileID: 6212805350895002867}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Building
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80347b775d1f2d9428f8810fb59b1458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallPrefab: {fileID: 919132149155446097, guid: afb19859bcedbbf4fbd3860b5e262be7, type: 3}
+  wallPrefab: {fileID: 8507833127201731401, guid: 4b195c9b8006a9249b0259b9202fb0ec, type: 3}
   roofPrefab: {fileID: 6085566277556701030, guid: 8d983de205ba2414eb19b3230715eb45, type: 3}
   points: []
+  floorHeight: 0

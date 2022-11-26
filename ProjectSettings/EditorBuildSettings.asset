@@ -8,5 +8,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Assets/Game.unity
     guid: 0905936a1395cd944adfa91e0df92516
+  - enabled: 1
+    path: Assets/Assets/Data/Buildings/Editor.unity
+    guid: 01e4ca46e32987843b9d2530cb213d64
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 7e0f9980507e76e4c84769dd633f891c, type: 2}

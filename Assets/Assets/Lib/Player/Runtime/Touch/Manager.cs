@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 namespace FunkySheep.Player.Touch
 {
@@ -36,7 +37,7 @@ namespace FunkySheep.Player.Touch
             Physics.Raycast(ray, out hit);
             if (hit.collider.gameObject.layer == 10)
             {
-                Debug.Log(hit.collider.name);
+                SceneManager.LoadSceneAsync("Assets/Data/Buildings/Editor", LoadSceneMode.Additive);
             }
         }
 

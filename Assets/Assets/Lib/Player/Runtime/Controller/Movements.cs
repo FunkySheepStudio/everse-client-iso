@@ -37,7 +37,10 @@ namespace FunkySheep.Player.Controller
         {
             // Move keyboard
             Vector2 movement = playerInputs.Movements.Move.ReadValue<Vector2>();
-            controller.Move((Vector3.forward * movement.y + Vector3.right * movement.x) * UnityEngine.Time.deltaTime * speed);
+            controller.Move((transform.forward * movement.y + transform.right * movement.x) * UnityEngine.Time.deltaTime * speed);
+
+            // Mouse
+            transform.Rotate(Vector3.up * Input.mouseScrollDelta * UnityEngine.Time.deltaTime * gyroSpeed);
 
             // Move gyro
             if (math.abs(Input.acceleration.y - initialYAcceleration) > 0.1)

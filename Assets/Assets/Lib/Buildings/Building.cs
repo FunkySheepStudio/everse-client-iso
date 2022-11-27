@@ -1,6 +1,7 @@
 using UnityEngine;
 using Unity.Mathematics;
 using FunkySheep.Geometry;
+using System.Collections.Generic;
 
 namespace FunkySheep.Buildings
 {
@@ -8,7 +9,9 @@ namespace FunkySheep.Buildings
     public class Building : MonoBehaviour
     {
         public GameObject wallPrefab;
+        public List<Texture2D> wallTextures;
         public GameObject roofPrefab;
+        public List<Texture2D> roofTextures;
         public float2[] points;
         public float floorHeight;
 
@@ -25,6 +28,8 @@ namespace FunkySheep.Buildings
 
         void CreateWalls()
         {
+            int wallTextureIndice = UnityEngine.Random.Range(0, wallTextures.Count);
+            Texture2D wallTexture = wallTextures[wallTextureIndice];
             for (int i = 0; i < points.Length; i++)
             {
                 Vector3 point = new Vector3(
@@ -58,14 +63,18 @@ namespace FunkySheep.Buildings
 
                 GameObject wallGo = GameObject.Instantiate(wallPrefab, middlePoint, LookAtRotationOnly_Y, transform);
                 wallGo.AddComponent<MeshCollider>();
+                wallGo.GetComponent<MeshRenderer>().material.SetTexture("_DiffuseTexture", wallTexture);
                 wallGo.transform.localScale = new Vector3(1, floorHeight, wallWidth);
             }
         }
 
         void CreateRoof()
         {
+            int roofTextureIndice = UnityEngine.Random.Range(0, roofTextures.Count);
+            Texture2D roofTexture = roofTextures[roofTextureIndice];
             GameObject roofGo = GameObject.Instantiate(roofPrefab, Vector3.up * floorHeight, Quaternion.Euler(90, 0, 0), transform);
             Roof roof = roofGo.AddComponent<Roof>();
+            roofGo.GetComponent<MeshRenderer>().material.SetTexture("_DiffuseTexture", roofTexture);
             roof.contour = new Vector2[points.Length];
             for (int i = 0; i < points.Length; i++)
             {

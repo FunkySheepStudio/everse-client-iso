@@ -1,6 +1,5 @@
 using UnityEngine;
 using Cinemachine;
-using UnityEditor.ShaderGraph.Internal;
 
 namespace FunkySheep.Cam
 {

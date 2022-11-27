@@ -45,6 +45,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallPrefab: {fileID: 8507833127201731401, guid: 4b195c9b8006a9249b0259b9202fb0ec, type: 3}
+  wallTextures:
+  - {fileID: 2800000, guid: 0349bca9e8a1cbb4ab02b240ffcf25af, type: 3}
+  - {fileID: 2800000, guid: 86fbce31d83447c45b0bf4580d153522, type: 3}
+  - {fileID: 2800000, guid: 1f89596251eefcb4e9c429dbb779f9c1, type: 3}
+  - {fileID: 2800000, guid: 9326703ff3bcf664885a406a062458f2, type: 3}
+  - {fileID: 2800000, guid: 7668b1e47d3a991459d80c974ec7d4ea, type: 3}
+  - {fileID: 2800000, guid: ffddbddbee2b59f468749b8214c8f57b, type: 3}
+  - {fileID: 2800000, guid: ee2939352b14af143b0dcbc82517fc11, type: 3}
+  - {fileID: 2800000, guid: c8216b11fe347b04a9d11401c0ed8764, type: 3}
+  - {fileID: 2800000, guid: 0bda89843f508d14faa7ccf422718d24, type: 3}
+  - {fileID: 2800000, guid: f31878ebd1519da4ab0849090260271a, type: 3}
   roofPrefab: {fileID: 6085566277556701030, guid: 8d983de205ba2414eb19b3230715eb45, type: 3}
+  roofTextures:
+  - {fileID: 2800000, guid: d523811c2afc6644b9710bc2a608fcff, type: 3}
+  - {fileID: 2800000, guid: 25095fab07ddf2f46a5b3f9e045bff33, type: 3}
+  - {fileID: 2800000, guid: 9c5ca09e0b41ea8479cd08fac47142f6, type: 3}
+  - {fileID: 2800000, guid: 9dc0df87f760ec74baef487c6fdc7b85, type: 3}
+  - {fileID: 2800000, guid: 4154184485a9fb8429b009a3600c423f, type: 3}
+  - {fileID: 2800000, guid: 3644a9698a85ce94ea2553e05d6b5620, type: 3}
+  - {fileID: 2800000, guid: fa78f6bebcacfd241a1c081d2ac704c1, type: 3}
+  - {fileID: 2800000, guid: a040f122d1157ca4ab42c8c51e702d26, type: 3}
+  - {fileID: 2800000, guid: 639814762ce987148929d7c6306c7523, type: 3}
   points: []
   floorHeight: 0

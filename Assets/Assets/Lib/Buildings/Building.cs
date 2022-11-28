@@ -10,17 +10,13 @@ namespace FunkySheep.Buildings
     {
         public GameObject wallPrefab;
         public List<Texture2D> wallTextures;
+        public Material wallMaterial;
         public GameObject roofPrefab;
         public List<Texture2D> roofTextures;
         public float2[] points;
         public float floorHeight;
-
-        private void Awake()
-        {
-            floorHeight = UnityEngine.Random.Range(5, 10);
-        }
-
-        private void Start()
+        public float perimeter;
+        public void Create()
         {
             CreateWalls();
             CreateRoof();
@@ -30,6 +26,11 @@ namespace FunkySheep.Buildings
         {
             int wallTextureIndice = UnityEngine.Random.Range(0, wallTextures.Count);
             Texture2D wallTexture = wallTextures[wallTextureIndice];
+            wallPrefab.GetComponent<MeshRenderer>().material = wallMaterial;
+            wallPrefab.GetComponent<MeshRenderer>().material.SetTexture("_DiffuseTexture", wallTexture);
+            wallPrefab.GetComponent<MeshRenderer>().material.SetFloat("_Tilling", perimeter / floorHeight);
+
+            /*Texture2D wallTexture = wallTextures[wallTextureIndice];
             for (int i = 0; i < points.Length; i++)
             {
                 Vector3 point = new Vector3(
@@ -63,9 +64,9 @@ namespace FunkySheep.Buildings
 
                 GameObject wallGo = GameObject.Instantiate(wallPrefab, middlePoint, LookAtRotationOnly_Y, transform);
                 wallGo.AddComponent<MeshCollider>();
-                wallGo.GetComponent<MeshRenderer>().material.SetTexture("_DiffuseTexture", wallTexture);
+                
                 wallGo.transform.localScale = new Vector3(1, floorHeight, wallWidth);
-            }
+            }*/
         }
 
         void CreateRoof()

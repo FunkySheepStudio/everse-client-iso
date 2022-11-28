@@ -65,7 +65,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Scale: 4.11
-    - _Tilling: 0.13
+    - _Tilling: 2.1
     m_Colors:
     - _Color: {r: 1, g: 0.80653065, b: 0.5330188, a: 0}
     - _LeavesColor: {r: 0.1353818, g: 0.4433962, b: 0, a: 0}

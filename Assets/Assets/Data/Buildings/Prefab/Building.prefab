@@ -56,6 +56,7 @@ MonoBehaviour:
   - {fileID: 2800000, guid: c8216b11fe347b04a9d11401c0ed8764, type: 3}
   - {fileID: 2800000, guid: 0bda89843f508d14faa7ccf422718d24, type: 3}
   - {fileID: 2800000, guid: f31878ebd1519da4ab0849090260271a, type: 3}
+  wallMaterial: {fileID: 2100000, guid: 493b3d7783821994b9a183d3c86b2971, type: 2}
   roofPrefab: {fileID: 6085566277556701030, guid: 8d983de205ba2414eb19b3230715eb45, type: 3}
   roofTextures:
   - {fileID: 2800000, guid: d523811c2afc6644b9710bc2a608fcff, type: 3}

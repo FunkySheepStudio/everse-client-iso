@@ -22,6 +22,7 @@ namespace FunkySheep.Buildings.Systems
                 }
 
                 building.perimeter = perimeter;
+                building.floorHeight = building.perimeter / points.Length;
             })
             .WithNone<SpawnBuildingOver>()
             .WithDeferredPlaybackSystem<EndSimulationEntityCommandBufferSystem>()

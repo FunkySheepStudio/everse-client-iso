@@ -7,5 +7,6 @@ namespace FunkySheep.Buildings.Components
     {
         public float2 center;
         public float perimeter;
+        public float floorHeight;
     }
 }

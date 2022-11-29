@@ -107,7 +107,7 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   initialMapPositionRounded: {fileID: 11400000, guid: 6076b7c0dff0ffc46842a8a7f7626ecb, type: 2}
   zoomLevel: {fileID: 11400000, guid: cb31a5b4bf836984db3d58b64097ba2a, type: 2}
-  diffuseUrl: {fileID: 11400000, guid: ff8d029f92fc155428b51a245266d1e7, type: 2}
-  material: {fileID: -876546973899608171, guid: 0ecdfc3584a294b47b55b346d495a98b, type: 3}
+  diffuseUrl: {fileID: 11400000, guid: 9aed32b4f65ffa74c833d9233b9b6977, type: 2}
+  material: {fileID: -876546973899608171, guid: b7e7521d2b8b39e43b04fa75f92066b9, type: 3}
   onTileRefreshed: {fileID: 11400000, guid: 96e75123aee949847bbee0bf489d8feb, type: 2}
   mapPosition: {x: 0, y: 0}

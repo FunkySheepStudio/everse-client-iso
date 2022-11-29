@@ -1139,7 +1139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   osmUrl: {fileID: 11400000, guid: 9aed32b4f65ffa74c833d9233b9b6977, type: 2}
   tileSize: {fileID: 11400000, guid: 8d1e63fafed0120428640f6883486ab9, type: 2}
-  prefab: {fileID: 8184193188344613803, guid: b0166dbe9e0356b4a86c26fb00381c65, type: 3}
+  prefab: {fileID: 3790987054937393742, guid: 3ff7326d95329aa49bfb9d3936422e6c, type: 3}
 --- !u!4 &2137423354
 Transform:
   m_ObjectHideFlags: 0

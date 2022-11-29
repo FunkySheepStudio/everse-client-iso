@@ -1,3 +1,4 @@
+using FunkySheep.Props.Components;
 using Unity.Entities;
 using Unity.Transforms;
 using UnityEngine;
@@ -14,10 +15,12 @@ namespace FunkySheep.Props.Systems
 
         public void Spawn(Transform parent, GameObject prefab)
         {
-            Entities.ForEach((Entity entity, EntityCommandBuffer buffer, in Translation translation, in Components.Tags.Spawn spawn) =>
+            Entities.ForEach((Entity entity, EntityCommandBuffer buffer, in Translation translation, in Components.Tags.Spawn spawn, in TileData tileData) =>
             {
                 GameObject prop = GameObject.Instantiate(prefab, parent);
                 prop.transform.position = translation.Value;
+                prop.transform.localScale = new Vector3(tileData.size, tileData.size, tileData.size);
+                prop.GetComponent<MeshRenderer>().material.color = new Color((float)tileData.color.x / 256, (float)tileData.color.y / 256, (float)tileData.color.z / 256 );
                 buffer.DestroyEntity(entity);
             })
             .WithDeferredPlaybackSystem<EndSimulationEntityCommandBufferSystem>()

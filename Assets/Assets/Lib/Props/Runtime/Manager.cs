@@ -60,9 +60,10 @@ namespace FunkySheep.Props
             entityManager.GetBuffer<Components.IsPropCreated>(props).CopyFrom(createdList);
             createdList.Dispose();
 
-            entityManager.AddComponent<TileBoundaries>(props);
-            entityManager.SetComponentData(props, new TileBoundaries
+            entityManager.AddComponent<TileData>(props);
+            entityManager.SetComponentData(props, new TileData
             {
+                size = tileSize.value / 256,
                 tilePosition = new int2(tile.position.x, tile.position.y),
                 start = new float2(tile.position.x * tileSize.value, tile.position.y * tileSize.value),
                 end = new float2((tile.position.x + 1) * tileSize.value, (tile.position.y + 1) * tileSize.value)

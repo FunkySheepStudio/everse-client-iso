@@ -3,6 +3,10 @@ using Unity.Transforms;
 using FunkySheep.Images.Components;
 using FunkySheep.Props.Components;
 using FunkySheep.Maps.Components;
+using Unity.Mathematics;
+using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
+using UnityEngine.Rendering;
+using Unity.Collections;
 
 namespace FunkySheep.Props.Systems
 {
@@ -11,25 +15,32 @@ namespace FunkySheep.Props.Systems
     {
         protected override void OnUpdate()
         {
-            Entities.ForEach((Entity entity, EntityCommandBuffer buffer, in DynamicBuffer<Pixels> pixels, in TileBoundaries tileBoundaries) =>
+            
+
+            Entities.ForEach((Entity entity, EntityCommandBuffer buffer, in DynamicBuffer<Pixels> pixels, in TileData tileData) =>
             {
                 for (int i = 0; i < pixels.Length; i++)
                 {
-                    if (pixels[i].Value.g == 173 && pixels[i].Value.b == 209 && pixels[i].Value.a == 158)
+                    Entity tree = buffer.CreateEntity();
+                    buffer.AddComponent<Translation>(tree);
+                    buffer.SetComponent(tree, new Translation
                     {
-                        Entity tree = buffer.CreateEntity();
-                        buffer.AddComponent<Translation>(tree);
-                        buffer.SetComponent(tree, new Translation
+                        Value = new Unity.Mathematics.float3
                         {
-                            Value = new Unity.Mathematics.float3
-                            {
-                                x = tileBoundaries.start.x + ((tileBoundaries.end.x - tileBoundaries.start.x) / 256 * (i % 256)),
-                                y = 0,
-                                z = tileBoundaries.start.y + ((tileBoundaries.end.y - tileBoundaries.start.y) / 256 * (i / 256))
-                            }
-                        });
-                        buffer.AddSharedComponent(entity, new TilePosition { Value = tileBoundaries.tilePosition });
-                    }
+                            x = tileData.start.x + ((tileData.end.x - tileData.start.x) / 256 * (i % 256)),
+                            y = 0,
+                            z = tileData.start.y + ((tileData.end.y - tileData.start.y) / 256 * (i / 256))
+                        }
+                    });
+                    buffer.AddSharedComponent(entity, new TilePosition { Value = tileData.tilePosition });
+
+                    buffer.AddComponent<TileData>(tree);
+                    buffer.SetComponent(tree, new TileData
+                    {
+                        size = tileData.size,
+                        color = new int3 { x = pixels[i].Value.g, y = pixels[i].Value.b, z = pixels[i].Value.a }
+                    });
+
                 }
 
                 buffer.DestroyEntity(entity);

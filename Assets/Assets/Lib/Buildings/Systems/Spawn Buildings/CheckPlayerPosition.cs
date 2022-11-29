@@ -26,6 +26,7 @@ namespace FunkySheep.Buildings.Systems
             .WithNone<Spawn>()
             .WithNone<SpawnBuildingOver>()
             .ScheduleParallel();
+            this.CompleteDependency();
         }
     }
 

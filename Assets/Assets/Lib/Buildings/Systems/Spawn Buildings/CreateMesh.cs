@@ -3,6 +3,7 @@ using FunkySheep.Buildings.Components;
 using Unity.Entities;
 using FunkySheep.Geometry.Components;
 using Unity.Mathematics;
+using FunkySheep.Buildings.Components.Barriers;
 
 namespace FunkySheep.Buildings.Systems
 {
@@ -65,7 +66,9 @@ namespace FunkySheep.Buildings.Systems
 
 
 
-            }).WithDeferredPlaybackSystem<EndSimulationEntityCommandBufferSystem>()
+            })
+            .WithNone<SpawnBuildingOver>()
+            .WithDeferredPlaybackSystem<EndSimulationEntityCommandBufferSystem>()
             .ScheduleParallel();
         }
     }

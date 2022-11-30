@@ -108,6 +108,6 @@ MonoBehaviour:
   initialMapPositionRounded: {fileID: 11400000, guid: 6076b7c0dff0ffc46842a8a7f7626ecb, type: 2}
   zoomLevel: {fileID: 11400000, guid: cb31a5b4bf836984db3d58b64097ba2a, type: 2}
   diffuseUrl: {fileID: 11400000, guid: ff8d029f92fc155428b51a245266d1e7, type: 2}
-  material: {fileID: -876546973899608171, guid: f9be044222f274e44999cc2563fcd096, type: 3}
+  material: {fileID: 2100000, guid: e775d001c1658b649b50b804945d62b6, type: 2}
   onTileRefreshed: {fileID: 11400000, guid: 96e75123aee949847bbee0bf489d8feb, type: 2}
   mapPosition: {x: 0, y: 0}

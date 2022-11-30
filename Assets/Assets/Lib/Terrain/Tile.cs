@@ -9,7 +9,8 @@ namespace FunkySheep.Terrain
         public Vector2Int position;
         public FunkySheep.Types.Vector2Int initialMapPositionRounded;
         public FunkySheep.Types.Int32 zoomLevel;
-        public FunkySheep.Types.String diffuseUrl;
+        public FunkySheep.Types.String osmUrl;
+        public FunkySheep.Types.String satelliteUrl;
         public Material material;
         public FunkySheep.Events.GameObjectEvent onTileRefreshed;
         public Vector2Int mapPosition;
@@ -23,7 +24,7 @@ namespace FunkySheep.Terrain
             GetComponent<TerrainCollider>().terrainData = terrain.terrainData;
             terrain.allowAutoConnect = true;
         }
-
+        
         public void Refresh()
         {
             mapPosition = new Vector2Int(
@@ -31,11 +32,12 @@ namespace FunkySheep.Terrain
                 initialMapPositionRounded.value.y - position.y
             );
 
-            DownLoadDiffuse();
+            DownLoadOsm();
+            DownLoadSatelite();
             onTileRefreshed.Raise(gameObject);
         }
 
-        void DownLoadDiffuse()
+        void DownLoadOsm()
         {
             string[] variables = new string[3] { "zoom", "position.x", "position.y" };
 
@@ -45,18 +47,34 @@ namespace FunkySheep.Terrain
                 mapPosition.y.ToString()
             };
 
-            string url = diffuseUrl.Interpolate(values, variables);
+            string url = osmUrl.Interpolate(values, variables);
             StartCoroutine(FunkySheep.Network.Downloader.DownloadTexture(url, (fileID, texture) =>
             {
-                ProcessDiffuse(texture);
+                texture.wrapMode = TextureWrapMode.Clamp;
+                texture.filterMode = FilterMode.Point;
+                //GetComponent<MeshRenderer>().material.SetTexture("_Osm", texture);
+                terrain.materialTemplate.SetTexture("_Osm", texture);
             }));
         }
 
-        public void ProcessDiffuse(Texture2D texture)
+        void DownLoadSatelite()
         {
-            texture.wrapMode = TextureWrapMode.Clamp;
-            texture.filterMode = FilterMode.Point;
-            terrain.materialTemplate.SetTexture("_MainTex", texture);
+            string[] variables = new string[3] { "zoom", "position.x", "position.y" };
+
+            string[] values = new string[3] {
+                zoomLevel.value.ToString(),
+                mapPosition.x.ToString(),
+                mapPosition.y.ToString()
+            };
+
+            string url = satelliteUrl.Interpolate(values, variables);
+            StartCoroutine(FunkySheep.Network.Downloader.DownloadTexture(url, (fileID, texture) =>
+            {
+                texture.wrapMode = TextureWrapMode.Clamp;
+                texture.filterMode = FilterMode.Point;
+                //GetComponent<MeshRenderer>().material.SetTexture("_Satelite", texture);
+                terrain.materialTemplate.SetTexture("_Satelite", texture);
+            }));
         }
     }
 }

@@ -34,7 +34,7 @@ namespace FunkySheep.Terrain
             {
                 for (int y = 0; y < resolution; y++)
                 {
-                    GameObject tileGo = GameObject.Instantiate(tilePrefab, new Vector3((x - boundary) * tileSize.value, -100, (y - boundary) * tileSize.value), Quaternion.identity, transform);
+                    GameObject tileGo = GameObject.Instantiate(tilePrefab, new Vector3((x - boundary) * tileSize.value, 0, (y - boundary) * tileSize.value), Quaternion.identity, transform);
                     Tile tile = tileGo.GetComponent<Tile>();
                     tileGo.name = x.ToString() + " " + y.ToString();
                     tile.position = new Vector2Int(x - boundary, y - boundary);
@@ -43,6 +43,11 @@ namespace FunkySheep.Terrain
                         1,
                         tileSize.value
                     );
+                    /*tile.transform.localScale = new Vector3(
+                        tileSize.value,
+                        1,
+                        tileSize.value
+                    );*/
                     tile.Refresh();
                     tiles[x, y] = tile;
                 }

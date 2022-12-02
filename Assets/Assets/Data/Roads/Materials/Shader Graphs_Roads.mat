@@ -7,24 +7,24 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Roof
-  m_Shader: {fileID: -6465566751694194690, guid: 1278824908f12e0459a715d11a692608, type: 3}
+  m_Name: Shader Graphs_Roads
+  m_Shader: {fileID: -6465566751694194690, guid: f0fec4258b3a6984e94d36cdbe0597fc, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
-  m_LightmapFlags: 2
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _DiffuseTexture:
-        m_Texture: {fileID: 0}
+    - _SampleTexture2D_eaeb2015eb2b41108ecf133b58b8504f_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 3644a9698a85ce94ea2553e05d6b5620, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -43,11 +43,9 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Tilling: 0.09
-    m_Colors:
-    - _Color: {r: 1, g: 0.8447676, b: 0.5896226, a: 0}
+    m_Colors: []
   m_BuildTextureStacks: []
---- !u!114 &3838436905002311165
+--- !u!114 &7650332602423669883
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

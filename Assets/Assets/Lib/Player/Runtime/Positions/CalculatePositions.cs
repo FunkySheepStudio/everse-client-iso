@@ -1,7 +1,6 @@
 using UnityEngine;
 using Unity.Mathematics;
 using Unity.Entities;
-using FunkySheep.Buildings.Systems;
 
 namespace FunkySheep.Player
 {
@@ -16,13 +15,15 @@ namespace FunkySheep.Player
         public FunkySheep.Events.Vector2Event OnLongPositionChanged;
         float2 position2D = new float2();
         float2 lastPosition2D = new float2();
-        CheckPlayerPosition playerPositionSystem;
+        FunkySheep.Buildings.Systems.CheckPlayerPosition playerBuildingPositionSystem;
+        FunkySheep.Roads.Systems.CheckPlayerPosition playerRoadsPositionSystem;
 
         private void Awake()
         {
             tilePosition.value = Vector2.zero;
             tilePositionRouded.value = lastTilePositionRouded.value = Vector2Int.zero;
-            playerPositionSystem = World.DefaultGameObjectInjectionWorld.GetExistingSystemManaged<CheckPlayerPosition>();
+            playerBuildingPositionSystem = World.DefaultGameObjectInjectionWorld.GetExistingSystemManaged<FunkySheep.Buildings.Systems.CheckPlayerPosition>();
+            playerRoadsPositionSystem = World.DefaultGameObjectInjectionWorld.GetExistingSystemManaged<FunkySheep.Roads.Systems.CheckPlayerPosition>();
         }
 
         private void Update()
@@ -51,7 +52,8 @@ namespace FunkySheep.Player
 
             if (math.distance(position2D, lastPosition2D) > 10)
             {
-                playerPositionSystem.CheckBuildingNearPlayer(position2D);
+                playerBuildingPositionSystem.CheckBuildingNearPlayer(position2D);
+                playerRoadsPositionSystem.CheckRoadsNearPlayer(position2D);
                 OnLongPositionChanged.Raise(position2D);
                 lastPosition2D = position2D;
             }

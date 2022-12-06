@@ -49,7 +49,8 @@ namespace FunkySheep.Osm
             // Exclude passed locations
             for (int i = 0; i < areaExclusiontList.Count; i++)
             {
-                request += "-way(around:" + searchRadius + "," + areaExclusiontList[i].latitude.ToString().Replace(",", ".") + "," + areaExclusiontList[i].longitude.ToString().Replace(",", ".") + ");";
+                request = request.Insert(0, "(");
+                request += "-way(around:" + searchRadius + "," + areaExclusiontList[i].latitude.ToString().Replace(",", ".") + "," + areaExclusiontList[i].longitude.ToString().Replace(",", ".") + "););";
             }
 
             areaExclusiontList.Add(new Area

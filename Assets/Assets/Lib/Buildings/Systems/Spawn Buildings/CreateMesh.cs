@@ -1,9 +1,6 @@
-using FunkySheep.Buildings.Components.Tags;
-using FunkySheep.Buildings.Components;
 using Unity.Entities;
-using FunkySheep.Geometry.Components;
 using Unity.Mathematics;
-using FunkySheep.Buildings.Components.Barriers;
+using FunkySheep.Geometry.Components;
 
 namespace FunkySheep.Buildings.Systems
 {
@@ -13,7 +10,7 @@ namespace FunkySheep.Buildings.Systems
     {
         protected override void OnUpdate()
         {
-            Entities.ForEach((Entity entity, EntityCommandBuffer buffer, in Components.Building building, in DynamicBuffer<Points> points, in Spawn spawn) =>
+            Entities.ForEach((Entity entity, EntityCommandBuffer buffer, in Components.Building building, in DynamicBuffer<Points> points) =>
             {
                 DynamicBuffer<Vertices> vertices = buffer.AddBuffer<Vertices>(entity);
                 DynamicBuffer<Triangles> triangles = buffer.AddBuffer<Triangles>(entity);
@@ -67,7 +64,7 @@ namespace FunkySheep.Buildings.Systems
 
 
             })
-            .WithNone<SpawnBuildingOver>()
+            .WithNone<Components.Barriers.SpawnBuildingOver>()
             .WithDeferredPlaybackSystem<EndSimulationEntityCommandBufferSystem>()
             .ScheduleParallel();
         }

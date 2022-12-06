@@ -14,9 +14,9 @@ namespace FunkySheep.Props.Systems
 
         public void CheckPropsNearPlayer(float2 position)
         {
-            Entities.ForEach((Entity entity, EntityCommandBuffer buffer,in Translation translation) =>
+            Entities.ForEach((Entity entity, EntityCommandBuffer buffer,in LocalTransform localTransform) =>
             {
-                if (math.distance(position, new float2(translation.Value.x, translation.Value.z)) < 100)
+                if (math.distance(position, new float2(localTransform.Position.x, localTransform.Position.z)) < 100)
                 {
                     buffer.AddComponent<Components.Tags.Spawn>(entity);
                 }

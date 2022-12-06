@@ -1,7 +1,7 @@
 using Unity.Entities;
 using Unity.Mathematics;
 
-namespace FunkySheep.Buildings.Components
+namespace FunkySheep.Geometry.Components
 {
     public struct Points : IBufferElementData
     {

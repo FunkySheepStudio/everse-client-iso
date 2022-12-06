@@ -22,10 +22,10 @@ namespace FunkySheep.Props.Systems
                 for (int i = 0; i < pixels.Length; i++)
                 {
                     Entity tree = buffer.CreateEntity();
-                    buffer.AddComponent<Translation>(tree);
-                    buffer.SetComponent(tree, new Translation
+                    buffer.AddComponent<LocalTransform>(tree);
+                    buffer.SetComponent(tree, new LocalTransform
                     {
-                        Value = new Unity.Mathematics.float3
+                        Position = new Unity.Mathematics.float3
                         {
                             x = tileData.start.x + ((tileData.end.x - tileData.start.x) / 256 * (i % 256)),
                             y = 0,

@@ -1,9 +1,6 @@
-using FunkySheep.Buildings.Components;
 using Unity.Entities;
 using Unity.Collections;
-using FunkySheep.Maps.Components;
-using FunkySheep.Buildings.Components.Barriers;
-using FunkySheep.Buildings.Components.Tags;
+using FunkySheep.Geometry.Components;
 
 namespace FunkySheep.Buildings.Systems
 {
@@ -13,7 +10,7 @@ namespace FunkySheep.Buildings.Systems
     {
         protected override void OnUpdate()
         {
-            Entities.ForEach((Entity entity, EntityCommandBuffer buffer, ref DynamicBuffer<Points> points, in Components.Building building, in Spawn spawn) =>
+            Entities.ForEach((Entity entity, EntityCommandBuffer buffer, ref DynamicBuffer<Points> points, in Components.Building building) =>
             {
                 bool result = Geometry.Utils.IsTriangleOrientedClockwise(
                     points[points.Length - 1].Value,
@@ -33,7 +30,7 @@ namespace FunkySheep.Buildings.Systems
                     }
                 }
             })
-            .WithNone<SpawnBuildingOver>()
+            .WithNone<Components.Barriers.SpawnBuildingOver>()
             .WithDeferredPlaybackSystem<EndSimulationEntityCommandBufferSystem>()
             .ScheduleParallel();
         }

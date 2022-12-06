@@ -1,11 +1,10 @@
-using FunkySheep.Buildings.Components;
 using Unity.Entities;
 using FunkySheep.Maps.Components;
 using FunkySheep.Buildings.Components.Barriers;
 
 namespace FunkySheep.Buildings.Systems
 {
-    [UpdateInGroup(typeof(SetBuildingCoordinatesGroup))]
+    [UpdateBefore(typeof(Osm.Systems.OsmGroup))]
     public partial class RemoveCollinearPoints : SystemBase
     {
         protected override void OnUpdate()
@@ -22,6 +21,11 @@ namespace FunkySheep.Buildings.Systems
                     {
                         gPSCoordinates.RemoveAt((i + 1) % gPSCoordinates.Length);
                     }
+                }
+
+                if (!gPSCoordinates[0].Value.Equals(gPSCoordinates[gPSCoordinates.Length - 1].Value))
+                {
+                    gPSCoordinates.RemoveAt(gPSCoordinates.Length - 1);
                 }
 
                 if (gPSCoordinates.Length < 3)

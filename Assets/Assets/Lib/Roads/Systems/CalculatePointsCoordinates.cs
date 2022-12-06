@@ -11,15 +11,15 @@ namespace FunkySheep.Roads.Systems
         protected override void OnUpdate()
         {
             TileSize tileSize;
-            if (!TryGetSingleton<TileSize>(out tileSize))
+            if (!SystemAPI.TryGetSingleton<TileSize>(out tileSize))
                 return;
 
             ZoomLevel zoomLevel;
-            if (!TryGetSingleton<ZoomLevel>(out zoomLevel))
+            if (!SystemAPI.TryGetSingleton<ZoomLevel>(out zoomLevel))
                 return;
 
             InitialMapPosition initialMapPosition;
-            if (!TryGetSingleton<InitialMapPosition>(out initialMapPosition))
+            if (!SystemAPI.TryGetSingleton<InitialMapPosition>(out initialMapPosition))
                 return;
 
             Entities.ForEach((Entity entity, EntityCommandBuffer buffer, ref Components.Road road, in DynamicBuffer<GPSCoordinates> gPSCoordinates) =>

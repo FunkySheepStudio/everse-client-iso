@@ -1,12 +1,11 @@
-using FunkySheep.Buildings.Components;
 using Unity.Entities;
 using Unity.Mathematics;
 using FunkySheep.Buildings.Components.Barriers;
+using FunkySheep.Geometry.Components;
 
 namespace FunkySheep.Buildings.Systems
 {
-    [UpdateInGroup(typeof(SetBuildingCoordinatesGroup))]
-    [UpdateAfter(typeof(CalculatePointsCoordinates))]
+    [UpdateAfter(typeof(Osm.Systems.OsmGroup))]
     public partial class CalculatePointsCenter : SystemBase
     {
         protected override void OnUpdate()

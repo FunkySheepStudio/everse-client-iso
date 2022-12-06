@@ -1,20 +1,16 @@
-using FunkySheep.Buildings.Components;
 using Unity.Entities;
 using Unity.Collections;
 using Unity.Mathematics;
-using FunkySheep.Maps.Components;
-using FunkySheep.Buildings.Components.Barriers;
-using FunkySheep.Buildings.Components.Tags;
+using FunkySheep.Geometry.Components;
 
 namespace FunkySheep.Buildings.Systems
 {
     [UpdateInGroup(typeof(SpawnBuildingGroup))]
-    [UpdateAfter(typeof(CheckPlayerPosition))]
     public partial class CalculatePointsOrder : SystemBase
     {
         protected override void OnUpdate()
         {
-            Entities.ForEach((Entity entity, EntityCommandBuffer buffer, ref DynamicBuffer<Points> points, in Components.Building building, in Spawn spawn) =>
+            Entities.ForEach((Entity entity, EntityCommandBuffer buffer, ref DynamicBuffer<Points> points, in Components.Building building) =>
             {
                 int maxPointIndex = 0;
                 for (int i = 0; i < points.Length; i++)
@@ -34,7 +30,7 @@ namespace FunkySheep.Buildings.Systems
                     points.Add(tempPoints[(i + maxPointIndex) % tempPoints.Length]);
                 }
             })
-            .WithNone<SpawnBuildingOver>()
+            .WithNone<Components.Barriers.SpawnBuildingOver>()
             .WithDeferredPlaybackSystem<EndSimulationEntityCommandBufferSystem>()
             .ScheduleParallel();
         }

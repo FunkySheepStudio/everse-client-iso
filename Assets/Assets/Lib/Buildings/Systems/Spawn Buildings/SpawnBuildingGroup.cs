@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace FunkySheep.Buildings.Systems
 {
-    [UpdateAfter(typeof(SetBuildingCoordinatesGroup))]
+    [UpdateAfter(typeof(CalculatePointsCenter))]
     public class SpawnBuildingGroup : ComponentSystemGroup
     {
     }

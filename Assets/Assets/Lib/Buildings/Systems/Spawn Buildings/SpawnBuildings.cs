@@ -1,13 +1,9 @@
-using FunkySheep.Buildings.Components;
 using Unity.Entities;
 using UnityEngine;
 using FunkySheep.Buildings.Components.Barriers;
-using FunkySheep.Buildings.Components.Tags;
-using System.Linq;
 using Unity.Mathematics;
-using FunkySheep.Geometry.Components;
 using UnityEngine.Rendering;
-using Unity.Entities.UniversalDelegates;
+using FunkySheep.Geometry.Components;
 
 namespace FunkySheep.Buildings.Systems
 {
@@ -21,7 +17,7 @@ namespace FunkySheep.Buildings.Systems
 
         public void Spawn(Transform root, GameObject prefabs)
         {
-            Entities.ForEach((Entity entity, EntityCommandBuffer buffer, in Components.Building building, in DynamicBuffer<Points> points, in DynamicBuffer<Triangles> triangles, in DynamicBuffer<Vertices> vertices, in DynamicBuffer<Uvs> uvs, in Spawn spawn) =>
+            Entities.ForEach((Entity entity, EntityCommandBuffer buffer, in Components.Building building, in DynamicBuffer<Points> points, in DynamicBuffer<Triangles> triangles, in DynamicBuffer<Vertices> vertices, in DynamicBuffer<Uvs> uvs) =>
             {
                 GameObject buildingGo = GameObject.Instantiate(prefabs, root);
                 buildingGo.transform.localPosition = new Vector3

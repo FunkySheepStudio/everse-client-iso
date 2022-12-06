@@ -1,8 +1,6 @@
-using FunkySheep.Buildings.Components;
 using Unity.Entities;
 using UnityEngine;
-using FunkySheep.Buildings.Components.Barriers;
-using FunkySheep.Buildings.Components.Tags;
+using FunkySheep.Geometry.Components;
 
 namespace FunkySheep.Buildings.Systems
 {
@@ -12,7 +10,7 @@ namespace FunkySheep.Buildings.Systems
     {
         protected override void OnUpdate()
         {
-            Entities.ForEach((Entity entity, EntityCommandBuffer buffer, ref Components.Building building, in DynamicBuffer<Points> points, in Spawn spawn) =>
+            Entities.ForEach((Entity entity, EntityCommandBuffer buffer, ref Components.Building building, in DynamicBuffer<Points> points) =>
             {
                 float perimeter = 0;
 
@@ -24,7 +22,7 @@ namespace FunkySheep.Buildings.Systems
                 building.perimeter = perimeter;
                 building.floorHeight = building.perimeter / points.Length;
             })
-            .WithNone<SpawnBuildingOver>()
+            .WithNone<Components.Barriers.SpawnBuildingOver>()
             .WithDeferredPlaybackSystem<EndSimulationEntityCommandBufferSystem>()
             .ScheduleParallel();
         }

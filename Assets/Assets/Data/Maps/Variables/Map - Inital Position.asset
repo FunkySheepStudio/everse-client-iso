@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3551a15056c8644b9dd03fd01daba70, type: 3}
-  m_Name: Map - Tile Size
+  m_Script: {fileID: 11500000, guid: e518b414a243642469cc8edd3b2a1788, type: 3}
+  m_Name: Map - Inital Position
   m_EditorClassIdentifier: 
   apiName: 
   reset: 1
-  value: 0
+  value: {x: 16782.691, y: 11836.445}

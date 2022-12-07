@@ -4,6 +4,7 @@ using FunkySheep.Geometry.Components;
 
 namespace FunkySheep.Buildings.Systems
 {
+    [DisableAutoCreation]
     [UpdateInGroup(typeof(SpawnBuildingGroup))]
     [UpdateAfter(typeof(CalculatePointsPerimeter))]
     public partial class CreateMesh : SystemBase

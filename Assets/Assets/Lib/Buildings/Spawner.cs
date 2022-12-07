@@ -13,15 +13,18 @@ namespace FunkySheep.Buildings
     {
         public GameObject prefab;
         SpawnBuildings spawnBuildings;
+        RandomizeStructure randomizeStructure;
 
         private void Awake()
         {
             spawnBuildings = World.DefaultGameObjectInjectionWorld.GetOrCreateSystemManaged<SpawnBuildings>();
+            randomizeStructure = World.DefaultGameObjectInjectionWorld.GetOrCreateSystemManaged<RandomizeStructure>();
         }
 
         private void Update()
         {
-            spawnBuildings.Spawn(transform, prefab);
+            //spawnBuildings.Spawn(transform, prefab);
+            randomizeStructure.Debug();
         }
     }
 }

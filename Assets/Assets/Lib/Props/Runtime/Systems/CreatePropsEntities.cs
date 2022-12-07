@@ -12,8 +12,6 @@ namespace FunkySheep.Props.Systems
     {
         protected override void OnUpdate()
         {
-            
-
             Entities.ForEach((Entity entity, EntityCommandBuffer buffer, in DynamicBuffer<Pixels> pixels, in TileData tileData) =>
             {
                 for (int i = 0; i < pixels.Length; i++)
@@ -37,7 +35,6 @@ namespace FunkySheep.Props.Systems
                         size = tileData.size,
                         color = new int3 { x = pixels[i].Value.g, y = pixels[i].Value.b, z = pixels[i].Value.a }
                     });
-
                 }
 
                 buffer.DestroyEntity(entity);

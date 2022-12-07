@@ -23,7 +23,7 @@ namespace FunkySheep.Buildings.Systems
                     }
                 }
 
-                if (!gPSCoordinates[0].Value.Equals(gPSCoordinates[gPSCoordinates.Length - 1].Value))
+                if (gPSCoordinates[0].Value.Equals(gPSCoordinates[gPSCoordinates.Length - 1].Value))
                 {
                     gPSCoordinates.RemoveAt(gPSCoordinates.Length - 1);
                 }

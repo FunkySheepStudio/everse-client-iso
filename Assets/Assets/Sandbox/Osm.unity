@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -402,6 +402,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 1
+      - m_Target: {fileID: 1177923274}
+        m_TargetAssemblyTypeName: FunkySheep.Osm.Downloader, Assembly-CSharp
+        m_MethodName: GetOsmDataAround
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 1
 --- !u!1 &630439487
 GameObject:
   m_ObjectHideFlags: 0
@@ -492,7 +504,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   overpassApiUrl: {fileID: 11400000, guid: 028eeaa1c87783948b4c7cfb13420def, type: 2}
-  searchRadius: 100
+  searchRadius: 500
   currentLatitude: {fileID: 11400000, guid: 37863171d38c74c4da7904cbb0582c73, type: 2}
   currentLongitude: {fileID: 11400000, guid: 5b4f47704bee54f46a234aa868dd1f5b, type: 2}
   exludedTags:
@@ -685,7 +697,7 @@ MonoBehaviour:
   initialLongitude: {fileID: 11400000, guid: b25f0a56db43eb1429e33c72938f156b, type: 2}
   calculatedLatitude: {fileID: 11400000, guid: 37863171d38c74c4da7904cbb0582c73, type: 2}
   calculatedLongitude: {fileID: 11400000, guid: 5b4f47704bee54f46a234aa868dd1f5b, type: 2}
-  distanceEventTrigger: 50
+  distanceEventTrigger: 400
   onGpsCoordinatesChanged: {fileID: 11400000, guid: f56bba38b9501804a92454b5f5277097, type: 2}
 --- !u!114 &1325772952
 MonoBehaviour:

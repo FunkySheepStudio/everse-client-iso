@@ -1,4 +1,4 @@
-using FunkySheep.Roads.Components;
+using FunkySheep.Geometry.Components;
 using Unity.Entities;
 using UnityEngine;
 using FunkySheep.Roads.Components.Tags;
@@ -6,7 +6,7 @@ using Unity.Mathematics;
 
 namespace FunkySheep.Roads.Systems
 {
-    [UpdateInGroup(typeof(SetRoadsCoordinatesGroup))]
+    [UpdateInGroup(typeof(RoadsGroup))]
     [UpdateAfter(typeof(CheckPlayerPosition))]
     public partial class SpawnRoads : SystemBase
     {

@@ -1,11 +1,11 @@
-using FunkySheep.Roads.Components;
+using FunkySheep.Geometry.Components;
 using FunkySheep.Roads.Components.Tags;
 using Unity.Entities;
 using Unity.Mathematics;
 
 namespace FunkySheep.Roads.Systems
 {
-    [UpdateInGroup(typeof(SetRoadsCoordinatesGroup))]
+    [UpdateInGroup(typeof(RoadsGroup))]
     [UpdateAfter(typeof(CalculatePointsCoordinates))]
     public partial class CheckPlayerPosition : SystemBase
     {

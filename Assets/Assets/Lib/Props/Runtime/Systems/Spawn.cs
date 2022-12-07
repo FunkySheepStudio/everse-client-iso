@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace FunkySheep.Props.Systems
 {
-    [UpdateInGroup(typeof(SpawnPropsGroup))]
+    [UpdateInGroup(typeof(PropsGroup))]
     [UpdateAfter(typeof(CheckPlayerPosition))]
     public partial class SpawnSystem : SystemBase
     {

@@ -1,11 +1,11 @@
 using Unity.Entities;
 using Unity.Mathematics;
 using FunkySheep.Maps.Components;
-using FunkySheep.Roads.Components;
+using FunkySheep.Geometry.Components;
 
 namespace FunkySheep.Roads.Systems
 {
-    [UpdateInGroup(typeof(SetRoadsCoordinatesGroup))]
+    [UpdateInGroup(typeof(RoadsGroup))]
     public partial class CalculatePointsCoordinates : SystemBase
     {
         protected override void OnUpdate()

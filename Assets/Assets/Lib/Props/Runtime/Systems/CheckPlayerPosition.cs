@@ -4,7 +4,7 @@ using Unity.Transforms;
 
 namespace FunkySheep.Props.Systems
 {
-    [UpdateInGroup(typeof(SpawnPropsGroup))]
+    [UpdateInGroup(typeof(PropsGroup))]
     [UpdateAfter(typeof(CreatePropsEntities))]
     public partial class CheckPlayerPosition : SystemBase
     {

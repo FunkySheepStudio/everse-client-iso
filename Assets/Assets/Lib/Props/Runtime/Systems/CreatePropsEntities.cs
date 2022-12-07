@@ -4,13 +4,10 @@ using FunkySheep.Images.Components;
 using FunkySheep.Props.Components;
 using FunkySheep.Maps.Components;
 using Unity.Mathematics;
-using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
-using UnityEngine.Rendering;
-using Unity.Collections;
 
 namespace FunkySheep.Props.Systems
 {
-    [UpdateInGroup(typeof(SpawnPropsGroup))]
+    [UpdateInGroup(typeof(PropsGroup))]
     public partial class CreatePropsEntities : SystemBase
     {
         protected override void OnUpdate()

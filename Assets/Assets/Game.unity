@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1044,12 +1044,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zoomLevel: {fileID: 11400000, guid: cb31a5b4bf836984db3d58b64097ba2a, type: 2}
-  latitude: {fileID: 11400000, guid: 52341af858dd34745b74d8f4e43d4a02, type: 2}
-  longitude: {fileID: 11400000, guid: b25f0a56db43eb1429e33c72938f156b, type: 2}
-  mapPosition: {fileID: 11400000, guid: 92528e581db8c644382f3df635f76633, type: 2}
-  mapPositionRounded: {fileID: 11400000, guid: 6076b7c0dff0ffc46842a8a7f7626ecb, type: 2}
-  OnPositionCalculated: {fileID: 11400000, guid: a09e9fce4a79adc4682b87621cbfc294, type: 2}
+  initialLatitude: {fileID: 11400000, guid: 52341af858dd34745b74d8f4e43d4a02, type: 2}
+  initialLongitude: {fileID: 11400000, guid: b25f0a56db43eb1429e33c72938f156b, type: 2}
+  initialMercatorPosition: {fileID: 11400000, guid: dd6be2251a1f4fa4c876f8febc53b363, type: 2}
+  initialMapPosition: {fileID: 11400000, guid: 92528e581db8c644382f3df635f76633, type: 2}
+  initialMapPositionRounded: {fileID: 11400000, guid: 6076b7c0dff0ffc46842a8a7f7626ecb, type: 2}
   tileSize: {fileID: 11400000, guid: 8d1e63fafed0120428640f6883486ab9, type: 2}
+  OnPositionCalculated: {fileID: 11400000, guid: a09e9fce4a79adc4682b87621cbfc294, type: 2}
 --- !u!114 &1979654253
 MonoBehaviour:
   m_ObjectHideFlags: 0
